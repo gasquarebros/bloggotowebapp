@@ -1,0 +1,7 @@
+{
+  "name": "Bloggoto",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,25 @@
+<app-login-header [title]="'wall'"></app-login-header>
+<ion-content *ngIf="userInfo != undefined">
+    
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" horizontal="start" >
+          <ion-button (click)="createPost()">Post on Wall</ion-button>
+          <ion-button (click)="goto('products')">Sell Products</ion-button>
+          <ion-button (click)="goto('services')">Post Services</ion-button>
+        </ion-fab-list>
+    </ion-fab>
+  <ion-item>
+    <ion-avatar>
+      <img src="assets/icon/avatar.png">
+    </ion-avatar>
+    <h6 *ngIf="userInfo.customer_username != undefined">Hi {{userInfo.customer_username}}!</h6>
+  </ion-item>
+  <hr no-padding no-margin>
+  <app-common-post [isProfileType] = "profileType"></app-common-post>
+</ion-content>
+<app-common-footer 
+    [postProfileType] = 'profileType'
+    (updatePageType) = profileSection($event)></app-common-footer>
