@@ -24,6 +24,7 @@
     .backbtn {
         float:left;
         width: 20%;
+        cursor: pointer;
     }
     .comments_count {
         width: 50%;
@@ -103,20 +104,34 @@ ion-card {
     position: fixed;
     bottom: 0;
     background: white;
+    margin-left: -7px;
     .comments-post-sec {
         margin: 5px 0px;
+        background: lightgrey;
         ion-avatar {
             width: 25px;
             height: 25px;
             float: left;
             margin-top: 9px;
+            margin-left: 7px;
         }
         .item-inner {
             width: 75%;
             padding-left: 8px;
+            .comments_txtarea {
+                margin-top: 0px;
+            }
         }
         .post-comments-action {
             width: 10%;
+            margin-right: 0;
+            float: right;
+            cursor: pointer;
+            .send_btn {
+                margin-top: 10px;
+                font-size: 22px;
+                color: var(--ion-color-primary, #3880ff);
+            }
         }
     }
 }

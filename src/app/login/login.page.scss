@@ -19,6 +19,13 @@ ion-card-header {
     text-decoration: none;
     
 }
+.validation-errors {
+    color: red;
+    font-size: 11px;
+}
+.validation-errors p {
+    margin: 0px 2px 0px 0px;
+}
 .login-action-btn {
     margin-bottom: 20px;
     margin-top: 15px;
@@ -52,6 +59,7 @@ ion-card-header {
     position: relative;
     bottom: 10px;
     width: 100%;
+    float: left;
     li:first {
         width: 31%;
     }

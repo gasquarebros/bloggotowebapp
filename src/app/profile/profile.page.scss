@@ -38,17 +38,20 @@
             }
             .badge {
                 position: absolute;
-                top: 50px;
-                left: 69px;
-                width: 25px;
-                height: 25px;
+                top: 57px;
+                left: 57px;
+                width: 18px;
+                height: 18px;
                 background-color: cornflowerblue;
                 border-radius: 50%;
-                font-size: 24px;
+                font-size: 20px;
                 color: white;
                 font-weight: 400;
                 padding: 0;
                 margin: 0;
+                ion-icon {
+                    font-size: 18px;
+                }
             }
             .profilename {
                 padding: 0px;

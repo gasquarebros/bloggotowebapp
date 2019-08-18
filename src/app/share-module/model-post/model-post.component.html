@@ -6,7 +6,7 @@
           <div class="UFIList">
             <div class="UFIRow UFIShareRow">
               <div class="backbtn">
-                <a class="UFIShareLink" (click)="close()" >&lt; Back </a>
+                <a class="UFIShareLink" (click)="close()" ><ion-icon name="arrow-round-back"></ion-icon> Back </a>
               </div>
               <div class="comments_count fr">
                 <span class="fcg">{{count}} comments</span>
@@ -61,13 +61,13 @@
                   <div class="comments-post-sec">
                     <ion-avatar>
                         <!--<img src="{{userInfo.bg_user_profile_picture}}">-->
-                        <img src="http://localhost/bloggotoweb/media/customers/679f93c626a802991421a3ca2f273151.jpg">
+                        <img src="{{userInfo.bg_user_profile_picture}}">
                     </ion-avatar>
                     <div class="item-inner">
-                        <ion-textarea formControlName="postcomments" rows="1" cols="20" placeholder="Post your comments"></ion-textarea>
+                        <ion-textarea formControlName="postcomments" rows="1" cols="20" class="comments_txtarea" placeholder="Post your comments"></ion-textarea>
                     </div>
                     <div class="post-comments-action">
-                      <ion-button class="submit-btn"  size="small" type="submit" [disabled]="!validations_form.valid" expand="block">></ion-button>
+                      <ion-icon name="send" class="send_btn"></ion-icon>
                     </div>
                   </div>
                 </form>

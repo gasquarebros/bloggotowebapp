@@ -71,11 +71,10 @@ export class CommonPostComponent implements OnInit, OnChanges {
         }
       }
     });
-    this.presentLoadingWithOptions();
+    //this.presentLoadingWithOptions();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes['isProfileType'] !== undefined) {
       this.isProfileType = changes['isProfileType']['currentValue'];
       if (this.isProfile === true) {
@@ -113,23 +112,23 @@ export class CommonPostComponent implements OnInit, OnChanges {
   getPostCategories() {
     this.api.getStaticData('post/blog_category?app_id=bloggoto_app_123456', this.reqOpts).subscribe(result => {
       const res: any = result;
-      console.log(res);
       const response = res.body;
       this.postCategories = response.category;
       this.postTypes = response.post_types;
-      console.log(this.postTypes);
     });
   }
 
   getTagBloggotians() {
-    const body = new FormData();
-    body.append('user_id', this.userInfo.bg_user_id);
-    this.api.postData('post/followers_list', body).subscribe(result => {
-      const res: any = result;
-      if (res !== undefined) {
-        this.followers = res[0].followers;
-      }
-    });
+    if(this.userInfo != null) {
+      const body = new FormData();
+      body.append('user_id', this.userInfo.bg_user_id);
+      this.api.postData('post/followers_list', body).subscribe(result => {
+        const res: any = result;
+        if (res !== undefined) {
+          this.followers = res[0].followers;
+        }
+      });
+    }
   }
 
   fetchPosts() {
@@ -140,11 +139,7 @@ export class CommonPostComponent implements OnInit, OnChanges {
     }
     this.api.getStaticData('post/post_list?' + additionParams, this.reqOpts).subscribe(result => {
       const res: any = result;
-      if (res.body !== undefined) {
-        console.log(res);
-        console.log('test');
-        console.log(res.body);
-        this.loadingController.dismiss();
+      if (res.body !== undefined) {       
         this.enableScroll = false;
         this.response = res.body;
         this.pageOffset = res.body.next_set;
@@ -154,6 +149,7 @@ export class CommonPostComponent implements OnInit, OnChanges {
     }, err => {
       console.log(err);
     });
+    //this.loadingController.dismiss();
   }
 
   loadFetchPosts() {
@@ -253,18 +249,22 @@ export class CommonPostComponent implements OnInit, OnChanges {
   }
 
   async createPost() {
-    const modal = await this.modalController.create({
-      component: ModelPostComponent,
-      componentProps: {
-        'type': 'post',
-        'post': '',
-        'postCategories': this.postCategories,
-        'postTypes': this.postTypes,
-        'userInfo': this.userInfo,
-        'followers': this.followers
-      }
-    });
-    return await modal.present();
+    if(this.userInfo != null) {
+      const modal = await this.modalController.create({
+        component: ModelPostComponent,
+        componentProps: {
+          'type': 'post',
+          'post': '',
+          'postCategories': this.postCategories,
+          'postTypes': this.postTypes,
+          'userInfo': this.userInfo,
+          'followers': this.followers
+        }
+      });
+      return await modal.present();
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   checkliked_user(data, type) {

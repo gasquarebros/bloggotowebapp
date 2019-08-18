@@ -1,6 +1,5 @@
-<app-login-header [title]="'wall'"></app-login-header>
-<ion-content *ngIf="userInfo != undefined">
-    
+<app-login-header [title]="'wall'" ></app-login-header>
+<ion-content>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
@@ -11,7 +10,7 @@
           <ion-button (click)="goto('services')">Post Services</ion-button>
         </ion-fab-list>
     </ion-fab>
-  <ion-item>
+  <ion-item *ngIf="userInfo != undefined && userInfo != null">
     <ion-avatar>
       <img src="assets/icon/avatar.png">
     </ion-avatar>

@@ -182,8 +182,18 @@ export class ModelPostComponent implements OnInit {
     this.api.postData('post/deletecomment', body).subscribe(result => {
       const res: any = result;
       if (res !== undefined) {
-        if (res.status === 'success') {
-          this.presentToast(res.message);
+        if (res[0].status === 'success') {
+
+          let deleteIndex: any = '';
+          _.each(this.commentsData, function(comments: any, index) {
+            if(comments.post_comment_id == data.post_comment_id) {
+              deleteIndex = index;
+            }
+          });
+          if(deleteIndex != '') {
+            this.commentsData.splice(deleteIndex, 1);
+          }
+          this.presentToast(res[0].message);
         } else {
           this.presentToast(res[0].message);
         }
@@ -214,8 +224,11 @@ export class ModelPostComponent implements OnInit {
     this.api.postData('post/post_addcomments', body).subscribe(result => {
       const res: any = result;
       if (res !== undefined) {
-        if (res.status === 'success') {
-          this.presentToast(res.message);
+        if (res[0].status === 'success') {
+          let records = {customer_first_name : this.userInfo.bg_first_name, customer_last_name: this.userInfo.bg_last_name, customer_photo: this.userInfo.bg_user_profile_picture, post_comment_message: form.postcomments, post_comment_user_id: this.userInfo.bg_user_id};
+          // this.commentsData.push(records);
+          this.fetchComments();
+          this.presentToast(res[0].message);
         } else {
           this.presentToast(res[0].message);
         }

@@ -64,33 +64,33 @@
               <img src="assets/icon/avatar.png">
           </ion-avatar>
           <div class="profile-top-section">
-            <p class="profile-username" *ngIf="userInfo != undefined && userInfo.customer_username != undefined">Hi, {{userInfo.customer_username}}</p>
-            <p class="profile-action-btn">
-              <button  ion-item  class="edit-profile-btn nobgm menu" menuClose [routerLink]="['/account']" routerDirection="root" (click)="profile()">edit profile</button>
-              <button  class="logout-btn nobgm" menuClose (click)="logout()">Logout</button>
+            <p class="profile-username" style="margin: 0px;" *ngIf="userInfo != undefined && userInfo.customer_username != undefined">Hi, {{userInfo.customer_username}}</p>
+            <p class="profile-action-btn" style="margin:5px 0px; ">
+              <button  ion-item  class="edit-profile-btn nobgm menu" style="background:none;" menuClose [routerLink]="['/account']" routerDirection="root" (click)="profile()">edit profile</button>
+              <button  class="logout-btn nobgm" style="background:none;" menuClose (click)="logout()">Logout</button>
             </p>
           </div>    
         </ion-item>
         <ion-item>
-          <button  menuClose ion-item class="menu" (click)="profile()" [routerLink]="['/profile']" routerDirection="root" >Profile</button>
+          <button  menuClose ion-item class="menu" style="font-size:16px; background:none;" (click)="profile()" [routerLink]="['/profile']" routerDirection="root" >Profile</button>
         </ion-item>  
         <ion-item>
-          <button  menuClose ion-item class="menu"  style="font-size:20px; background:none;">Messages</button>
+          <button  menuClose ion-item class="menu"  style="font-size:16px; background:none;">Messages</button>
         </ion-item> 
         <ion-item>
-          <button menuClose ion-item class="menu"  (click)="draftRedirect('draft')" sstyle="font-size:20px; background:none;">Drafts</button>
+          <button menuClose ion-item class="menu"  style="font-size:16px; background:none;" (click)="draftRedirect('draft')" sstyle="font-size:20px; background:none;">Drafts</button>
         </ion-item> 
         <ion-item>
-          <button menuClose ion-item class="menu"  (click)="draftRedirect('Favourites')" sstyle="font-size:20px; background:none;">Favourites</button>
+          <button menuClose ion-item class="menu"  style="font-size:16px; background:none;" (click)="draftRedirect('Favourites')" sstyle="font-size:20px; background:none;">Favourites</button>
         </ion-item> 
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">My Purchases</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Purchases</a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">My Bookings</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Bookings</a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">Bank Details</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">Bank Details</a>
         </ion-item>
         <ion-item-divider color="secondary">
           <ion-label>
@@ -98,19 +98,19 @@
           </ion-label>
         </ion-item-divider>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">My Sales</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Sales</a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">My Services</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Services</a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;"> Orders Received</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;"> Orders Received</a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">Bookings Received</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">Bookings Received</a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:20px; background:none;">Bookings Received</a>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">Bookings Received</a>
         </ion-item>
       </ion-list>
     </ion-content>

@@ -13,9 +13,8 @@
       <ion-img class="logo-icon" src="assets/icon/logo.png" ></ion-img>
       <hr>
       <hr>
-      <form [formGroup]="validations_form"  (ngSubmit)="launchPage(validations_form.value)">
-          <div class="validation-errors">
-              {{formError}}
+      <form [formGroup]="validations_form" *ngIf="showForgotSection == false" (ngSubmit)="launchPage(validations_form.value)">
+          <div class="validation-errors" [innerHTML]="formError">
           </div>
           <ion-item>
             <ion-input  formControlName="username" placeholder="EmailId/UserName"></ion-input>
@@ -38,15 +37,33 @@
             </ng-container>
           </div>
           <hr>
-          <a class="forgot_password" href="url">Forgot Password?</a>
+          <a class="forgot_password" (click)="showForgot()">Forgot Password?</a>
         
         <div class="login-action-btn">
           <ion-button class="buttons" type="submit" [disabled]="!validations_form.valid"><p>Already a Member<span>Sign in</span></p></ion-button>
           <ion-button class="buttons" (click)="OpenSignup()"><p>For Better Experience<span>Sign up</span></p></ion-button>
         </div>
       </form>
+      <form [formGroup]="validations_Forgot_form" *ngIf="showForgotSection == true" (ngSubmit)="resetPassword(validations_Forgot_form.value)">
+        <div class="validation-errors" [innerHTML]="formForgotError">
+        </div>
+        <ion-item>
+          <ion-input formControlName="email" type="email" placeholder="Email ID" required></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_forgot_messages.email">
+            <div class="error-message" *ngIf="validations_Forgot_form.get('email').hasError(validation.type) && (validations_Forgot_form.get('email').dirty || validations_Forgot_form.get('email').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="login-action-btn">
+          <ion-button class="buttons" type="submit" [disabled]="!validations_Forgot_form.valid"><p>Submit</p></ion-button>
+          <ion-button class="buttons" (click)="goBack()"><p>Back</p></ion-button>
+        </div>
+      </form>
       <div class="skip-sec">
-        <a class="skip_link" href="url">Skip and just Explore</a><ion-icon class="icon" name="information-circle-outline"></ion-icon>
+        <a class="skip_link" [routerLink]="['/wall']">Skip and just Explore</a><ion-icon class="icon" name="information-circle-outline"></ion-icon>
       </div>
 
       <ul class="footer_additional_links" >
@@ -56,5 +73,4 @@
         <li class="middle"><a [routerLink]="['/static']" [queryParams]="{section: 'privacy-policy'}" routerDirection="root" >Privacy Policy</a></li>
         <li class="last"><a [routerLink]="['/static']" [queryParams]="{section: 'user-agreement'}" routerDirection="root">Agreements</a></li>
       </ul>
-	  <ion-button class="buttons" (click)="RedirectTest()"><p>For Better Experience<span>Sign up</span></p></ion-button>
 </ion-content>

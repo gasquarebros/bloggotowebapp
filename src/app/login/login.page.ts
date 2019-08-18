@@ -15,20 +15,29 @@ import { AppComponent } from '../app.component';
 })
 export class LoginPage implements OnInit {
   public formError: string;
+  public formForgotError: string;
+  public showForgotSection: boolean = false;
   validations_form: FormGroup;
+  validations_Forgot_form: FormGroup;
   validation_messages = {
     'username': [
       { type: 'required', message: 'EmailId/Username is required.' },
       { type: 'minlength', message: 'Username must be at least 5 characters long.' },
-      { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
+      { type: 'maxlength', message: 'Username cannot be more than 255 characters long.' },
       { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
       { type: 'validUsername', message: 'Your username has already been taken.' }
     ],
     'password': [
       { type: 'required', message: 'Password is required.' },
       { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'maxlength', message: 'Password cannot be more than 25 characters long.' },
+      { type: 'maxlength', message: 'Password cannot be more than 255 characters long.' },
       { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+    ],
+  };
+  validation_forgot_messages = {
+    'email': [
+      { type: 'required', message: 'EmailId is required.' },
+      { type: 'pattern', message: 'Invalid Email' }
     ],
   };
   constructor(
@@ -56,18 +65,20 @@ export class LoginPage implements OnInit {
         ])),
       });
 
+      this.validations_Forgot_form = this.formBuilder.group({
+        email: new FormControl('', Validators.compose([
+          Validators.pattern('[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})'),
+          Validators.required
+        ]))
+      });
+
       this.authService.getUserInfo().then(items => {
         const userInfo = items;
-        console.log('login info');
-        console.log(userInfo);
         if (userInfo !== null) {
           this.router.navigateByUrl('/launch');
           this.router.navigate(['/launch']);
         }
       });
-  }
-  RedirectTest() {
-  this.router.navigateByUrl('/launch');
   }
 
   launchPage(values) {
@@ -91,21 +102,37 @@ export class LoginPage implements OnInit {
     }, err => {
       console.log(err);
     });
-    /*this.storage.set('ACCESS_TOKEN', 'asdhsadusa-asdasdsad-adasd-sadasda');
-    this.storage.set('USER_DATA', {"bg_user_id": "12",
-    "bg_first_name": "GA",
-    "bg_last_name": "squarebros",
-    "bg_user_group": "writer",
-    "bg_user_type": "0",
-    "company_name": "",
-    "customer_username": "gasquarebros",
-    "access_token": "bWeL09463cTutvZo",
-    "bg_user_profile_picture": "https://www.bloggoto.com/media/customers//23327dcc89fa92683f31464b8f08adc0.jpg"});
-    
-    this.router.navigateByUrl('/launch');*/
   }
+
   OpenSignup() {
     this.router.navigateByUrl('/signup');
+  }
+
+  showForgot() {
+    this.showForgotSection = true;
+    this.formForgotError = '';
+  }
+  goBack() {
+    this.showForgotSection = false;
+  }
+
+  resetPassword(values) {
+    this.formError = '';
+    const body = new FormData();
+    body.append('email', values.email);
+    this.api.postData('api/login', body).subscribe(result => {
+      const res: any = result;
+      if (res !== undefined) {
+        if (res[0].status === 'success') {
+          this.showForgotSection = false;
+        } else {
+          this.showForgotSection = true;
+          this.formForgotError = res[0].message;
+        }
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
 }
