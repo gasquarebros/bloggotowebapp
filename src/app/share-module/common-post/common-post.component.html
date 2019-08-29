@@ -12,6 +12,7 @@
 <div >
   <!-- Cards -->
   <ion-card *ngFor="let record of posts" no-margin class="card">
+    <div *ngIf="record.post_id !='' && record.post_id > 0">
     <ion-row>
       <ion-col col-10>      
         <ion-list lines="none">  
@@ -97,7 +98,7 @@
         <div [innerHTML]="record.post_full_description"></div>
       </div>
     </ion-card-content>
-
+    </div>
   </ion-card>
   <div class="no-post txtcenter" *ngIf="!posts">
     <p>No Post Found</p>
