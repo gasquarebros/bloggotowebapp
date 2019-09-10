@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { LoginHeaderComponent } from '../share-module/login-header/login-header.component';
 import { CommonServicesComponent } from '../share-module/common-services/common-services.component';
@@ -21,7 +22,7 @@ export class ServicesPage implements OnInit {
   public appid: string = 'BloggotoApp';
 
   constructor(public loadingController: LoadingController, private api: RestApiService,
-    public authService: AuthService, private route: ActivatedRoute, public toastCtrl: ToastController) { }
+    public authService: AuthService, private route: ActivatedRoute, public toastCtrl: ToastController, public router: Router) { }
 
   ngOnInit() {
     this.categories = [];
@@ -73,7 +74,7 @@ export class ServicesPage implements OnInit {
   }
 
   loadService(cat) {
-
+    this.router.navigate(['/servicelist', ], { queryParams: { 'type': 'category', 'category_id': cat.ser_cate_primary_id } });
   }
 
 }

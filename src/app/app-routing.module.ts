@@ -27,10 +27,14 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'share-module', loadChildren: './share-module/share-module.module#ShareModulePageModule' },
   { path: 'draft-posts', loadChildren: './draft-posts/draft-posts.module#DraftPostsPageModule' },
-  { path: 'draft-posts/:any', loadChildren: './draft-posts/draft-posts.module#DraftPostsPageModule' },  { path: 'account', loadChildren: './account/account.module#AccountPageModule' },
+  { path: 'draft-posts/:any', loadChildren: './draft-posts/draft-posts.module#DraftPostsPageModule' },
+  { path: 'account', loadChildren: './account/account.module#AccountPageModule' },
   { path: 'products', loadChildren: './products/products.module#ProductsPageModule' },
   { path: 'services', loadChildren: './services/services.module#ServicesPageModule' },
-
+  { path: 'servicelist', loadChildren: './servicelist/servicelist.module#ServicelistPageModule' },
+  { path: 'servicelist/:any', loadChildren: './servicelist/servicelist.module#ServicelistPageModule' },
+  { path: 'serviceview', loadChildren: './serviceview/serviceview.module#ServiceviewPageModule' },
+  { path: 'serviceview/:slug', loadChildren: './serviceview/serviceview.module#ServiceviewPageModule' },
 
 ];
 

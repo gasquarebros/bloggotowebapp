@@ -1,0 +1,22 @@
+<app-login-header [title]="'Services'"></app-login-header>
+<div class="sorting_options">
+  <div class="sortoptions brdrgt">
+    <div class="sortinside"> 
+      <div class="sorttxt" (click)="presentActionSheet()">
+        <ion-icon name="options"></ion-icon>
+        Sort
+      </div>
+    </div>
+  </div>
+  <div class="sortoptions">
+      <div class="sortinside"> 
+        <div class="sorttxt" (click)="showFilter()">
+          <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+          Filter
+        </div>
+      </div>
+  </div>
+</div>
+<ion-content>
+  <app-common-services [category] ="category" [sort] ="sort" ></app-common-services>  
+</ion-content>
