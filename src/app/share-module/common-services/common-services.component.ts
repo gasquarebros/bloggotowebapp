@@ -19,10 +19,13 @@ export class CommonServicesComponent implements OnInit, OnChanges {
   public profileView = false;
 
   @Input()
-  public category: any;
+  public sort: any;
 
   @Input()
-  public sort: any;
+  public filterData: any;
+
+  @Input()
+  public updateFilter: boolean;
 
   public posts: any;
   public nextOffset: any;
@@ -49,6 +52,13 @@ export class CommonServicesComponent implements OnInit, OnChanges {
       this.sort = changes['sort']['currentValue'];
       this.fetchservices();
     }
+    if(changes['filterData'] !== undefined) {
+      this.filterData = changes['filterData']['currentValue'];
+      this.fetchservices();
+    }
+    if(changes['updateFilter'] != undefined) {
+      this.fetchservices();
+    }
   }
 
   async presentLoadingWithOptions() {
@@ -65,6 +75,7 @@ export class CommonServicesComponent implements OnInit, OnChanges {
     if(this.profileInfo != undefined && this.profileInfo !='') {
       this.api.getStaticData('profile/viewServices?userid=' + this.profileInfo.info.customer_id + '&offset = ' + nextOffset, []
       ).subscribe(result => {
+        this.loadingController.dismiss();
         const response: any = result;
         if (response.body !== undefined) {
           const res = response.body;
@@ -80,15 +91,10 @@ export class CommonServicesComponent implements OnInit, OnChanges {
         this.loadingController.dismiss();
       });
     } else {
-      let queryparams = '?app_id=' + this.appID + '&offset = ' + nextOffset;
-      if(this.category != undefined && this.category !='') {
-        queryparams += '&category='+this.category;
-      }
-      if(this.sort != undefined && this.sort !='') {
-        queryparams += '&sortby='+this.sort;
-      }
+      const queryparams = this.createRequest(nextOffset);
       this.api.getStaticData('restservices/servicelist'+ queryparams, []
       ).subscribe(result => {
+        this.loadingController.dismiss();
         const response: any = result;
         if (response.body !== undefined) {
           const res = response.body;
@@ -104,6 +110,30 @@ export class CommonServicesComponent implements OnInit, OnChanges {
         this.loadingController.dismiss();
       });
     }
+  }
+
+  createRequest(nextOffset) {
+
+    let queryparams = '?app_id=' + this.appID + '&offset = ' + nextOffset;
+    if(this.filterData.category != undefined && this.filterData.category !='') {
+      queryparams += '&category='+this.filterData.category;
+    }
+    if(this.filterData.subcategory != undefined && this.filterData.subcategory !='') {
+      queryparams += '&subcategory='+this.filterData.subcategory;
+    }
+    if(this.filterData.city != undefined && this.filterData.city !='') {
+      queryparams += '&customer_city='+this.filterData.city;
+    }
+    if(this.filterData.availability != undefined && this.filterData.availability !='') {
+      queryparams += '&availability='+this.filterData.availability;
+    }
+    if(this.filterData.title != undefined && this.filterData.title !='') {
+      queryparams += '&search_field='+this.filterData.title;
+    }
+    if(this.sort != undefined && this.sort !='') {
+      queryparams += '&sortby='+this.sort;
+    }
+    return queryparams;
   }
 
   ionRefresh(event, offset) {

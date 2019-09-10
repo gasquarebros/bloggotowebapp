@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
 import { RestApiService } from '../rest-api.service';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'underscore';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-services',
@@ -21,8 +22,14 @@ export class ServicesPage implements OnInit {
   public categories: any;
   public appid: string = 'BloggotoApp';
 
-  constructor(public loadingController: LoadingController, private api: RestApiService,
-    public authService: AuthService, private route: ActivatedRoute, public toastCtrl: ToastController, public router: Router) { }
+  constructor(
+    public loadingController: LoadingController, 
+    private api: RestApiService,
+    public authService: AuthService, 
+    private route: ActivatedRoute, 
+    public toastCtrl: ToastController, 
+    public router: Router,
+    private storage: Storage) { }
 
   ngOnInit() {
     this.categories = [];
@@ -65,6 +72,7 @@ export class ServicesPage implements OnInit {
         const response = res.body;
         if (response.status === 'success') {
           this.categories = response.html;
+          this.storage.set('service_category', this.categories);
         }
         this.loadingController.dismiss();
       }

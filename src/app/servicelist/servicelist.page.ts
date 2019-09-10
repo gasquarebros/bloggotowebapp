@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonServicesComponent } from '../share-module/common-services/common-services.component';
 import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { MenuController, PopoverController, ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { FiltercomponentComponent } from './filtercomponent/filtercomponent.component';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-servicelist',
@@ -13,9 +13,13 @@ import { FiltercomponentComponent } from './filtercomponent/filtercomponent.comp
 })
 export class ServicelistPage implements OnInit {
 
-  public category: any;
-
   public sort: any;
+
+  public filterData: any;
+
+  public categories: any = {};
+
+  public updateFilter: boolean;
 
   constructor(private route: ActivatedRoute,
     private menu: MenuController,
@@ -23,15 +27,20 @@ export class ServicelistPage implements OnInit {
     public modalController: ModalController,
     public loadingController: LoadingController,
     private toastCtrl: ToastController,
-    public actionSheetController: ActionSheetController) { }
+    public actionSheetController: ActionSheetController,
+    public storage: Storage,
+    private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.category = '';
+    this.filterData = { 'title':'', 'category':'', 'subcategory':'', 'availability': [], 'city': '' };
     if(this.route.snapshot.queryParamMap['params']) {
       if(this.route.snapshot.queryParamMap['params'].type == 'category') {
-        this.category = this.route.snapshot.queryParamMap['params'].category_id;
+        this.filterData.category = this.route.snapshot.queryParamMap['params'].category_id;
       }
     }
+    this.storage.get('service_category').then((val) => {
+      this.categories = val;
+    });
   }
 
   async presentActionSheet() {
@@ -73,14 +82,23 @@ export class ServicelistPage implements OnInit {
   }
 
   async showFilter() {
-    const data = [];
     const modal = await this.modalController.create({
       component: FiltercomponentComponent,
       componentProps: {
         'type': 'filter',
-        'post': data,
+        'post': this.filterData,
+        'categories': this.categories,
       }
     });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null && dataReturned.data != '') {
+        this.filterData = dataReturned.data;
+        this.updateFilter = !this.updateFilter;
+        this.ref.detectChanges();
+      }
+    });
+
     return await modal.present();
   }
 
