@@ -2,7 +2,7 @@
 <ion-content padding>
   <ul class="service_category" *ngIf="categories != undefined && categories.length > 0">
     <li *ngFor="let cats of categories">
-        <a (click) = "loadService(cats.ser_cate_slug)">{{cats.ser_cate_name}}</a>
+        <a (click) = "loadService(cats)">{{cats.ser_cate_name}}</a>
     </li>
   </ul>
 </ion-content>

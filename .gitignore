@@ -1,1 +1,4 @@
 platforms
+
+# dependencies
+/node_modules

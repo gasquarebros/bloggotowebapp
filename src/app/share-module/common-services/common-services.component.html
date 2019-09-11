@@ -4,14 +4,20 @@
           <img src="{{record.galleryimages[0]}}">
       </ion-avatar>
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-          <h2>{{record.ser_title}}</h2>
-          <p> <strong><span *ngIf="record.customer_gst_no"></span> {{record.customer_username}} </strong> <span *ngIf="record.ser_cate_name">-&gt; {{record.ser_cate_name}}</span></p>
+          <h2 class="crpoint" (click)="gotoList(record)">{{record.ser_title}}</h2>
+          <p> <strong class="crpoint" (click)="userProfile(record.customer_username)"><span *ngIf="record.customer_gst_no"></span> {{record.customer_username}} </strong> <span *ngIf="record.ser_cate_name">-&gt; {{record.ser_cate_name}}</span></p>
           <p>{{record.ser_description}}</p>
           <h3 class="price" *ngIf="record.ser_discount_price !='' && record.discount > 0">
-              {{record.ser_discount_price}} / {{record.ser_pricet_type}}
+            ₹{{record.ser_discount_price}} / {{record.ser_pricet_type}}
           </h3>
           <h3 class="price" *ngIf="record.discount == 0">
-              {{record.ser_price}} / {{record.ser_pricet_type}}
+            ₹{{record.ser_price}} / {{record.ser_pricet_type}}
           </h3>
       </ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="posts.length == 0">
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <p class="txtcenter">No Data Found</p>
+    </ion-label>
   </ion-item>

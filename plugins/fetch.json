@@ -90,5 +90,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "ionic-plugin-deeplinks": {
+    "source": {
+      "type": "registry",
+      "id": "ionic-plugin-deeplinks"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
