@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
 import { ModalController, NavParams, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import * as _ from 'underscore';
@@ -7,7 +7,7 @@ import * as _ from 'underscore';
   templateUrl: './filtercomponent.component.html',
   styleUrls: ['./filtercomponent.component.scss'],
 })
-export class FiltercomponentComponent implements OnInit {
+export class FiltercomponentComponent implements OnInit, AfterViewInit {
 
   public filterData: any = {};  
 
@@ -16,6 +16,7 @@ export class FiltercomponentComponent implements OnInit {
   public countries: any = {};
   public states: any = {};
   public cities: any = {};
+  public viewloaded: boolean = false;
 
   // @Output()
   // public updateFilter = new EventEmitter();
@@ -27,6 +28,7 @@ export class FiltercomponentComponent implements OnInit {
     public storage: Storage) { }
 
   ngOnInit() {
+    this.viewloaded = false;
     // this.filterData = { 'title':'', 'category':'', 'subcategory':'', 'availability': [], 'city': '' };
     this.filterData = this.navParams.data.post;
     this.categories = this.navParams.data.categories;
@@ -35,6 +37,13 @@ export class FiltercomponentComponent implements OnInit {
     this.states = this.navParams.data.states;
     this.cities = this.navParams.data.cities;
     this.updateSubcategory();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.viewloaded = true;  
+    }, 200);
+    
   }
 
   ionViewWillEnter () {

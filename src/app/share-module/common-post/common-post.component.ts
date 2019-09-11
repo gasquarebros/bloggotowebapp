@@ -145,6 +145,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
         this.pageOffset = res.body.next_set;
         this.nextOffset = res.body.next_set;
         this.posts = res.body.records;
+        let i= 0;
+        _.each(this.posts, (post: any) => {
+            if(post.post_embed_video_url) {
+              this.posts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+            }
+            i++;
+        });
       }
     }, err => {
       console.log(err);
@@ -165,6 +172,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
           this.nextOffset = res[0].data.next_set;
           const morePosts = res[0].data.records;
           this.posts = this.posts.concat(morePosts);
+          let i= 0;
+          _.each(this.posts, (post: any) => {
+              if(post.post_embed_video_url) {
+                this.posts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+              }
+              i++;
+          });
         }
       }, err => {
         console.log(err);
@@ -180,6 +194,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
             this.pageOffset = response.next_set;
             this.nextOffset = response.next_set;
             const morePosts = response.records;
+            let i= 0;
+            _.each(morePosts, (post: any) => {
+                if(post.post_embed_video_url) {
+                  morePosts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+                }
+                i++;
+            });
             this.posts = this.posts.concat(morePosts);
           }
         }, err => {
@@ -194,6 +215,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
             this.pageOffset = response.next_set;
             this.nextOffset = response.next_set;
             const morePosts = response.records;
+            let i= 0;
+            _.each(morePosts, (post: any) => {
+                if(post.post_embed_video_url) {
+                  morePosts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+                }
+                i++;
+            });
             this.posts = this.posts.concat(morePosts);
           }
         }, err => {
@@ -218,6 +246,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
       if (response !== undefined) {
         this.posts = response[0].data.records;
         this.nextOffset = response[0].data.next_set;
+        let i= 0;
+        _.each(this.posts, (post: any) => {
+            if(post.post_embed_video_url) {
+              this.posts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+            }
+            i++;
+        });
       }
       this.loadingController.dismiss();
     });
@@ -443,6 +478,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
         this.pageOffset = '';
         this.nextOffset = 0;
         this.posts = response.records;
+        let i= 0;
+        _.each(this.posts, (post: any) => {
+            if(post.post_embed_video_url) {
+              this.posts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+            }
+            i++;
+        });
       }
     }, err => {
       console.log(err);
@@ -461,6 +503,13 @@ export class CommonPostComponent implements OnInit, OnChanges {
         this.pageOffset = response.next_set;
         this.nextOffset = response.next_set;
         this.posts = response.records;
+        let i= 0;
+        _.each(this.posts, (post: any) => {
+            if(post.post_embed_video_url) {
+              this.posts[i].youtube = this.domSanitizer.bypassSecurityTrustResourceUrl(post.post_embed_video_url);
+            }
+            i++;
+        });
       }
     }, err => {
       console.log(err);
