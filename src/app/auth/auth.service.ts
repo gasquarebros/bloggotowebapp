@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
 export class AuthService {
   // AUTH_SERVER_ADDRESS  =  'https://cors-anywhere.herokuapp.com/https://www.bloggoto.com/api';
   // AUTH_SERVER_ADDRESS  =  'http://localhost/bloggotoweb/api';
-  AUTH_SERVER_ADDRESS  =  'https://www.bloggoto.com/api';
+  AUTH_SERVER_ADDRESS  =  'http://www.bloggoto.com/api';
   authSubject  =  new  BehaviorSubject(false);
 
   constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
@@ -46,6 +46,28 @@ export class AuthService {
         }
       })
     );
+  }
+
+  fetchMasterData(data) {
+    this.getCountries(data).subscribe(result => {
+      const res: any = result;
+      if(res.body.status == 'success') {
+        const datas = res.body.data;
+        if (datas.countries) {
+          this.storage.set('country', datas.countries);
+        }
+        if (datas.states) {
+          this.storage.set('state', datas.states);
+        }
+        if (datas.cities) {
+          this.storage.set('city', datas.cities);
+        }
+      }
+    });
+  }
+
+  getCountries(data) {
+    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + data, { observe: 'response' });
   }
 
   getUserInfo() {

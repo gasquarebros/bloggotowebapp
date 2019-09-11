@@ -1,11 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { CommonServicesComponent } from '../share-module/common-services/common-services.component';
 import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { MenuController, PopoverController, ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { FiltercomponentComponent } from './filtercomponent/filtercomponent.component';
 import { Storage } from '@ionic/storage';
-
+import * as _ from 'underscore';
 @Component({
   selector: 'app-servicelist',
   templateUrl: './servicelist.page.html',
@@ -21,6 +21,13 @@ export class ServicelistPage implements OnInit {
 
   public updateFilter: boolean;
 
+  public subcategories: any = {};
+  public countries: any = {};
+  public states: any = {};
+  public cities: any = {};
+  public filteredCities: any = {};
+
+
   constructor(private route: ActivatedRoute,
     private menu: MenuController,
     public popoverController: PopoverController,
@@ -29,9 +36,14 @@ export class ServicelistPage implements OnInit {
     private toastCtrl: ToastController,
     public actionSheetController: ActionSheetController,
     public storage: Storage,
-    private ref: ChangeDetectorRef) { }
+    private ref: ChangeDetectorRef) {
+    }
 
+  ionViewWillEnter() {
+    this.ngOnInit();
+  }
   ngOnInit() {
+
     this.filterData = { 'title':'', 'category':'', 'subcategory':'', 'availability': [], 'city': '' };
     if(this.route.snapshot.queryParamMap['params']) {
       if(this.route.snapshot.queryParamMap['params'].type == 'category') {
@@ -41,6 +53,30 @@ export class ServicelistPage implements OnInit {
     this.storage.get('service_category').then((val) => {
       this.categories = val;
     });
+    this.storage.get('service_subcategory').then((val) => {
+      this.subcategories = val;
+    });
+    this.storage.get('country').then((val) => {
+      this.countries = val;
+    });
+    this.storage.get('state').then((val) => {
+      this.states = val;
+    });
+    this.storage.get('city').then((val) => {
+      this.cities = val;
+      this.filterCities();
+    });
+  }
+
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: 'circles',
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
   }
 
   async presentActionSheet() {
@@ -82,17 +118,22 @@ export class ServicelistPage implements OnInit {
   }
 
   async showFilter() {
+    this.presentLoadingWithOptions();
     const modal = await this.modalController.create({
       component: FiltercomponentComponent,
       componentProps: {
         'type': 'filter',
         'post': this.filterData,
         'categories': this.categories,
+        'subcategories': this.subcategories,
+        //'countries': this.countries,
+        //'states': this.states,
+        'cities': this.filteredCities,
       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null && dataReturned.data != '') {
+      if (dataReturned !== null && dataReturned.data != '' && dataReturned.data != undefined) {
         this.filterData = dataReturned.data;
         this.updateFilter = !this.updateFilter;
         this.ref.detectChanges();
@@ -100,6 +141,25 @@ export class ServicelistPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  filterCities() {
+    this.filteredCities = [];
+    if(this.states) {
+      let tempstateIds = [];
+      _.each(this.states, (state: any) => {
+          tempstateIds.push(state.id);
+      });
+      if(tempstateIds.length > 0) {
+        _.each(this.cities, (city: any) => {
+          if(_.contains(tempstateIds, city.city_state)) {
+            this.filteredCities.push(city);
+          }
+        });
+      }
+    } else {
+      this.filteredCities = this.cities;
+    }
   }
 
 }

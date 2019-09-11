@@ -13,7 +13,7 @@
         <ion-label position="stacked">Title</ion-label>
         <ion-input type="text" value="{{filterData.title}}" (ionBlur)="handleinput($event, 'title')"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="categories.length > 0">
         <ion-label>Select category</ion-label>
         <ion-select placeholder="category" (ionChange)="handleinput($event, 'category')">
           <ion-select-option *ngFor="let cat of categories;let i=index;"
@@ -21,11 +21,12 @@
           [selected]="filterData.category == cat.ser_cate_primary_id">{{cat.ser_cate_name}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="subcategories.length > 0">
         <ion-label>Select subcategory</ion-label>
         <ion-select placeholder="subcategory"  (ionChange)="handleinput($event, 'subcategory')">
-          <ion-select-option value="f">Female</ion-select-option>
-          <ion-select-option value="m">Male</ion-select-option>
+            <ion-select-option *ngFor="let subcat of subcategories;let i=index;"
+            [value]='subcat.pro_subcate_primary_id'
+            [selected]="filterData.subcategory == subcat.ser_cate_primary_id">{{subcat.pro_subcate_name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -40,11 +41,12 @@
             <ion-select-option value="sun">Sun</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="cities.length > 0">
         <ion-label>Select city</ion-label>
         <ion-select placeholder="city"  (ionChange)="handleinput($event, 'city')">
-          <ion-select-option value="f">Female</ion-select-option>
-          <ion-select-option value="m">Male</ion-select-option>
+            <ion-select-option *ngFor="let citie of cities;let i=index;"
+            [value]='citie.city_id'
+            [selected]="filterData.city == citie.city_id">{{citie.city_name}}</ion-select-option>
         </ion-select>
       </ion-item>
     </div>

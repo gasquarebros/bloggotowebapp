@@ -110,6 +110,10 @@ export class CommonServicesComponent implements OnInit, OnChanges {
         this.loadingController.dismiss();
       });
     }
+    setTimeout(() => {
+      this.loadingController.dismiss();
+    }, 500);
+    
   }
 
   createRequest(nextOffset) {

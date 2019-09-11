@@ -1,0 +1,56 @@
+.productsection {
+    .productTitlesection {
+        clear: both;
+        display: block;
+        float: left;
+        width: 100%;
+
+        .ser_section_types {
+            font-size: 13px;
+            width: 100%;
+            float: left;
+            clear: both;
+            margin-top: 0px;
+            .txt {
+                width: auto;
+                float: left;
+            }
+            .icon{
+                float: left;
+                font-size: 18px;
+            }
+        }
+    }
+    .gallery {
+        clear:both;
+    }
+    .pricing {
+        .price {
+            color:red;
+        }
+    }
+
+    .providersection {
+        ion-avatar {
+            float:left;
+        }
+        p {
+            float:left;
+            margin-left: 20px;
+            margin-top: 0px;
+            .providername {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .shareicons {
+                font-size: 30px;
+                margin-top: 10px;
+                float: left;
+                a {
+                    margin-right:20px;
+                }
+            }
+        }
+    }
+
+}
