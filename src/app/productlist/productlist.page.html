@@ -1,0 +1,52 @@
+<app-login-header [title]="'Products'"></app-login-header>
+<ion-content>
+    <ion-grid>
+      <div id="s-backout-link">
+        <div class="a-subheader">
+          <a>
+            <h4>
+              <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+              <span>{{subHeader}}</span>
+            </h4>
+          </a>
+        </div>
+      </div>
+
+      <div id="centerBelow">
+        <div id="s-slick-result-header" class="a-container sx-rib">
+          <div class="a-row a-spacing-none a-grid-vertical-align a-grid-center">
+            <div class="a-column a-span7">
+              <span class="a-size-small a-color-secondary a-text-bold">{{productCount}} Results found</span>
+            </div>
+            <div class="a-column a-span5 a-text-right a-span-last">
+              <a id="sx-top-filter-button" class="a-size-small a-link-normal a-text-bold">Filter
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ion-row>
+        <ion-col size="6" class='cardProducts' *ngFor="let product of products; let i = index">
+            <div class="card-container">
+              <div class="outer_img">
+                <div class="inner_img">
+                    <img [src]="product.product_thumbnail"  class="imgCardMain" />
+                </div>
+              </div>
+              <div class="grid-detail">
+                <h5 class="sx-title"><span class="textProductTitle">{{ product.product_name }}</span></h5>
+                <!--<span class="productdesc" [innerHTML]="product.product_short_description"></span>-->
+                <div class="a-row a-spacing-mini a-size-mini a-color-secondary sx-overflow-ellipses"><span>by </span><span>COTTON SHOPY</span></div>
+                <div class="reduction">
+                  <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product.discount > 0">₹{{product.product_special_price}}</span>
+                  <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product.discount <= 0">₹{{product.product_price}}</span>
+                  <span class="a-letter-space"></span>
+                  <span class="old-price a-text-strike"  *ngIf="product.discount > 0">₹{{product.product_price}}</span>
+                </div>
+              </div>
+            </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

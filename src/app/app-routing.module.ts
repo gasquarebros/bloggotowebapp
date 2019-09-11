@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: './account/account.module#AccountPageModule' },
   { path: 'products', loadChildren: './products/products.module#ProductsPageModule' },
   { path: 'services', loadChildren: './services/services.module#ServicesPageModule' },
+  { path: 'productlist', loadChildren: './productlist/productlist.module#ProductlistPageModule' },
   { path: 'servicelist', loadChildren: './servicelist/servicelist.module#ServicelistPageModule' },
   { path: 'servicelist/:any', loadChildren: './servicelist/servicelist.module#ServicelistPageModule' },
   { path: 'serviceview', loadChildren: './serviceview/serviceview.module#ServiceviewPageModule' },
