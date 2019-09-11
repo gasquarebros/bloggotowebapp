@@ -82,7 +82,9 @@ export class ServiceviewPage implements OnInit {
           let filteredCities = [];
           _.each(this.posts.cities, (cty: any) => {
               let findCity: any = _.findWhere(this.overallCities, {city_id: cty});
-              filteredCities.push(findCity.city_name);
+              if(findCity.city_name != undefined) {
+                filteredCities.push(findCity.city_name);
+              }
           });
           this.posts.cities = filteredCities;
           // filteredCities

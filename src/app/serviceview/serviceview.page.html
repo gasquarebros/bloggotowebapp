@@ -26,6 +26,9 @@
           ₹{{posts.ser_price}} / {{posts.ser_pricet_type}}
       </h3>
     </div>
+    <p>
+        <ion-button expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Book now</ion-button>
+    </p>
     <div class="providersection" >
       <ion-avatar slot="start" class="ios hydrated" (click)="userProfile(posts.customer_username)">
           <img src="{{posts.customer_image}}">
@@ -46,12 +49,12 @@
     </div>
     <div class="availability">
       <ion-list-header class="ios hydrated">Availability</ion-list-header>
-      <ion-chip color="primary" *ngFor="let availability of posts.availability">
+      <ion-chip outline class="ion-color ion-color-primary ios chip-outline ion-activatable hydrated" *ngFor="let availability of posts.availability">
         <ion-label  *ngIf="availability != ''">{{availability}}</ion-label>
       </ion-chip>
 
         <ion-list-header class="ios hydrated">Available Cities</ion-list-header>
-        <ion-chip color="primary" *ngFor="let city of posts.cities">
+        <ion-chip outline class="ion-color ion-color-primary ios chip-outline ion-activatable hydrated"  *ngFor="let city of posts.cities">
           <ion-label  *ngIf="city != ''">{{city}}</ion-label>
         </ion-chip>
       </div>
