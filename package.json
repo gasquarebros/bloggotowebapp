@@ -50,6 +50,7 @@
     "ionic-angular": "^3.9.8",
     "ionic-native": "^2.9.0",
     "ionic-plugin-deeplinks": "^1.0.20",
+    "moment": "^2.24.0",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
     "tslib": "^1.9.0",

@@ -1,0 +1,78 @@
+<ion-content fullscreen>
+    <div class="top-header">
+      <a class="back-icon ptr" (click)="closeModalPopup()"><ion-icon name="arrow-round-back"></ion-icon></a>
+      <div class="fltrtext">
+        <span>Book Service</span>
+      </div>
+    </div>
+
+    <form onsubmit="processForm(event)">
+      <div class="filter-section">
+        <ion-item>
+          <ion-label position="stacked">Start Date</ion-label>
+          <ion-datetime displayFormat="DD-MM-YYYY" (ionChange)="handleinput($event, 'startDate')" [min]="minDate" name="startDate" [(ngModel)]="modelData.startDate"  placeholder="Select Service Start Date"></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="posts.ser_pricet_type == 'day' || posts.ser_pricet_type == 'hour'">
+            <ion-label position="stacked">End Date</ion-label>
+            <ion-datetime displayFormat="DD-MM-YYYY" [min]="endMinDate" name="endDate" [(ngModel)]="modelData.endDate"  placeholder="Select Service End Date"></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="posts.ser_pricet_type == 'hour'">
+          <ion-label>Select Time Range</ion-label>
+          <ion-select placeholder="Select Time Range" name="startTime" [(ngModel)]="modelData.startTime" (ionChange)="handleinput($event, 'startTime')">
+              <ion-select-option *ngFor="let startRange of timeRange;let i=index;"
+              [value]='startRange.value'>{{startRange.label}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="posts.ser_pricet_type == 'hour'">
+          <ion-label>Select Time Range</ion-label>
+          <ion-select placeholder="Select Time Range" name="endTime" [(ngModel)]="modelData.endTime" (ionChange)="handleinput($event, 'endTime')">
+              <ion-select-option *ngFor="let endRange of timeEndRange;let i=index;"
+              [value]='endRange.value'>{{endRange.label}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Address Line1</ion-label>
+          <ion-input type="text" value="" name="address1" [(ngModel)]="modelData.address1" (ionBlur)="handleinput($event, 'address1')"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Address Line2</ion-label>
+          <ion-input type="text" value="" name="address2" [(ngModel)]="modelData.address2" (ionBlur)="handleinput($event, 'address2')"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="states.length > 0 && viewloaded == true">
+          <ion-label>Select State</ion-label>
+          <ion-select placeholder="state" name="state" [(ngModel)]="modelData.state" (ionChange)="handleinput($event, 'state')">
+              <ion-select-option *ngFor="let state of states;let i=index;"
+            [value]='state.id'>{{state.varStateName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <ion-item *ngIf="cities.length > 0 && viewloaded == true">
+          <ion-label>Select city</ion-label>
+          <ion-select placeholder="city" name="city" [(ngModel)]="modelData.city" (ionChange)="handleinput($event, 'city')">
+              <ion-select-option *ngFor="let citie of cities;let i=index;"
+            [value]='citie.city_id'>{{citie.city_name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Zipcode</ion-label>
+          <ion-input type="text" value="" name="zipcode" [(ngModel)]="modelData.zipcode" (ionBlur)="handleinput($event, 'zipcode')"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Landmark</ion-label>
+          <ion-input type="text" value="" name="landmark" [(ngModel)]="modelData.landmark" (ionBlur)="handleinput($event, 'landmark')"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Additonal message</ion-label>
+          <ion-input type="text" value="" name="additional" [(ngModel)]="modelData.additional" (ionBlur)="handleinput($event, 'additional')"></ion-input>
+        </ion-item> 
+      </div>
+      <div class="filter-action">
+        <div col="6" class="width50 blkbtn ptr" (click)="closeModalPopup()">
+          <span class="txt">Cancel</span>
+        </div>
+        <button col="6"  type="submit" class="width50 redbtn ptr">
+          Book Now
+        </button>
+      </div>
+    </form>
+  </ion-content>      

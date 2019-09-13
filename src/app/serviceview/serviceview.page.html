@@ -26,8 +26,11 @@
           ₹{{posts.ser_price}} / {{posts.ser_pricet_type}}
       </h3>
     </div>
+    <div class="description">
+      <p>{{posts.ser_description}}</p>
+    </div>
     <p>
-        <ion-button expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Book now</ion-button>
+        <ion-button (click)="showFilter(posts)" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Book now</ion-button>
     </p>
     <div class="providersection" >
       <ion-avatar slot="start" class="ios hydrated" (click)="userProfile(posts.customer_username)">
@@ -35,18 +38,24 @@
       </ion-avatar>
       <p> Service provided by <span class="providername" (click)="userProfile(posts.customer_username)">{{posts.customer_username}}</span>
         <br>
-        <span class="shareicons">
+        <!--<span class="shareicons">
           <a target="_blank" href="https://www.facebook.com/sharer.php?u=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-facebook"></ion-icon></a>
           <a target="_blank" href="https://plus.google.com/share?url=http://www.bloggoto.com/services/view/{{posts.ser_slug}}">  <ion-icon name="logo-googleplus"></ion-icon></a>
           <a target="_blank" href="https://twitter.com/share?text=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-twitter"></ion-icon></a>
           <a target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="mail"></ion-icon></a>
-        </span>
+        </span>-->
+        <span class="shareicons">
+            <a target="_blank" *ngIf="posts.customer_facebook_link" href="{{posts.customer_facebook_link}}"><ion-icon name="logo-facebook"></ion-icon></a>
+            <a target="_blank" *ngIf="posts.customer_youtube_link" href="{{posts.customer_youtube_link}}"><ion-icon name="logo-youtube"></ion-icon></a>
+            <a target="_blank" *ngIf="posts.customer_twitter_link" href="{{posts.customer_twitter_link}}"><ion-icon name="logo-twitter"></ion-icon></a>
+            <a target="_blank" *ngIf="posts.customer_instagram_link" href="{{posts.customer_instagram_link}}"><ion-icon name="logo-instagram"></ion-icon></a>
+            <a target="_blank" *ngIf="posts.customer_linkedin_link" href="{{posts.customer_linkedin_link}}"><ion-icon name="logo-linkedin"></ion-icon></a>
+            <a target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.customer_email}}"><ion-icon name="mail"></ion-icon></a>
+            <a target="_blank" *ngIf="posts.customer_phone" href="tel:{{posts.customer_phone}}"><ion-icon name="call"></ion-icon></a>
+          </span>
       </p>
-      
     </div>
-    <div class="description">
-      <p>{{posts.ser_description}}</p>
-    </div>
+    
     <div class="availability">
       <ion-list-header class="ios hydrated">Availability</ion-list-header>
       <ion-chip outline class="ion-color ion-color-primary ios chip-outline ion-activatable hydrated" *ngFor="let availability of posts.availability">
@@ -59,4 +68,15 @@
         </ion-chip>
       </div>
   </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://www.facebook.com/sharer.php?u=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-facebook"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://plus.google.com/share?url=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-googleplus"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://twitter.com/share?text=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-twitter"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="mail"></ion-icon></a></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

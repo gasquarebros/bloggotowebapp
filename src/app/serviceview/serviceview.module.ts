@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ServiceviewPage } from './serviceview.page';
 import { ShareModulePageModule } from '../share-module/share-module.module';
+import { BookserviceComponent } from './bookservice/bookservice.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
     ShareModulePageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ServiceviewPage]
+  declarations: [
+    ServiceviewPage,
+    BookserviceComponent
+  ],
+  entryComponents: [
+    BookserviceComponent
+  ]
 })
 export class ServiceviewPageModule {}
