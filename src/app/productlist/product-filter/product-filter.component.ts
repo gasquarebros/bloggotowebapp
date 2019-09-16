@@ -89,13 +89,11 @@ export class ProductFilterComponent implements OnInit, AfterViewInit {
   }
 
   clearFilter() {
-    this.filterData = { 'title':'', 'category':'', 'subcategory':'', 'availability': [], 'city': '' };
-    // this.updateFilter.emit(this.filterData);
+    this.filterData = { 'title':'', 'cat':'', 'subcat':'', 'price_from': '', 'price_to': '' };
     this.closeModalPopup(this.filterData);
   }
 
   applyFilter() {
-    // this.updateFilter.emit(this.filterData);
     this.closeModalPopup(this.filterData);
   }
 

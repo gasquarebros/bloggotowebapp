@@ -18,6 +18,7 @@ export class ProductlistPage implements OnInit {
   public products: any;
   public appid: string = 'BloggotoApp';
   public productCount: number = 0;
+  public nextOffset: number = 0;
   public subHeader: any;
   public sort: any;
   public filterData: any = {};
@@ -75,6 +76,10 @@ export class ProductlistPage implements OnInit {
 
   createRequestObject() {
     let searchString  = '?app_id=' + this.appid;
+    
+    if (this.filterData.title != '') {
+      searchString += '&search=' + this.filterData.title;
+    }
     if (this.filterData.subcat != '') {
       searchString += '&subcat=' + this.filterData.subcat;
     }
@@ -103,6 +108,7 @@ export class ProductlistPage implements OnInit {
         if (response.status === 'ok') {
           this.products = response.data.records;
           this.productCount = response.data.total_rows;
+          this.nextOffset = response.data.next_set;
         }
         this.loadingController.dismiss();
       }
@@ -117,18 +123,9 @@ export class ProductlistPage implements OnInit {
   ionRefresh(event, offset) {
     if (offset !== '') {
       if (offset !== undefined) {
-        // this.pageOffset = offset;
-        console.log('ionrefresh Event Triggered!');
-       //  this.loadFetchPosts();
+       this.fetchProducts();
       } else {
-        /*if (this.isProfileType === 'draft') {
-          this.fetchDraft();
-        } else if (this.isProfileType === 'favourite') {
-          this.fetchfavourite();
-        } else {
-          this.fetchPosts();
-        }*/
-        console.log('ionrefresh Event Triggered! Else');
+        this.fetchProducts();
       }
       setTimeout(() => {
         event.target.complete();
@@ -151,25 +148,33 @@ export class ProductlistPage implements OnInit {
         text: 'Price - Low to High',
         cssClass: (this.sort == 'price-low') ? 'active': '',
         handler: () => {
+          this.nextOffset = 0;
           this.sort = "price-low";
+          this.fetchProducts();
         }
       }, {
         text: 'Price - High to Low',
         cssClass: (this.sort == 'price-high') ? 'active': '',
         handler: () => {
+          this.nextOffset = 0;
           this.sort = "price-high";
+          this.fetchProducts();
         }
       }, {
         text: 'Ascending Order A-Z',
         cssClass: (this.sort == 'asc') ? 'active': '',
         handler: () => {
+          this.nextOffset = 0;
           this.sort = "asc";
+          this.fetchProducts();
         }
       },{
         text: 'Descending Order Z-A',
         cssClass: (this.sort == 'desc') ? 'active': '',
         handler: () => {
+          this.nextOffset = 0;
           this.sort = "desc";
+          this.fetchProducts();
         }
       }, {
         text: 'Cancel',
@@ -200,9 +205,11 @@ export class ProductlistPage implements OnInit {
 
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null && dataReturned.data != '' && dataReturned.data != undefined) {
+        this.nextOffset = 0;
         /*this.filterData = dataReturned.data;
         this.updateFilter = !this.updateFilter;
         this.ref.detectChanges();*/
+        this.fetchProducts();
       }
     });
 
