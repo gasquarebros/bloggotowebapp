@@ -93,7 +93,7 @@ export class ProductlistPage implements OnInit {
       searchString += '&price_to=' + this.filterData.price_to;
     }
     if(this.sort !='') {
-      searchString += '&sortby = '+ this.sort;
+      searchString += '&sortb='+ this.sort;
     }
     return searchString;
   }
@@ -195,20 +195,13 @@ export class ProductlistPage implements OnInit {
       componentProps: {
         'type': 'filter',
         'post': this.filterData,
-        //'categories': this.categories,
-        //'subcategories': this.subcategories,
-        //'countries': this.countries,
-        //'states': this.states,
-        //'cities': this.filteredCities,
       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null && dataReturned.data != '' && dataReturned.data != undefined) {
         this.nextOffset = 0;
-        /*this.filterData = dataReturned.data;
-        this.updateFilter = !this.updateFilter;
-        this.ref.detectChanges();*/
+        this.filterData = dataReturned.data;
         this.fetchProducts();
       }
     });
