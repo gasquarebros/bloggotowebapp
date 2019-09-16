@@ -7,7 +7,7 @@ import { RestApiService } from '../rest-api.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { Router } from '@angular/router';
-
+import { Storage } from '@ionic/storage';
 import * as _ from 'underscore';
 
 @Component({
@@ -37,6 +37,7 @@ export class ProductsPage implements OnInit {
     public authService: AuthService,
     public router: Router,
     private route: ActivatedRoute,
+    private storage: Storage,
     public toastCtrl: ToastController) { }
 
   ngOnInit() {
@@ -78,6 +79,7 @@ export class ProductsPage implements OnInit {
         const response = res.body;
         if (response.status === 'success') {
           this.categories = response.html.product_category;
+          this.storage.set('product_cateogies', this.categories);
         }
         this.loadingController.dismiss();
       }
@@ -115,7 +117,7 @@ export class ProductsPage implements OnInit {
   }
 
   redirectList(subcats) {
-    console.log(subcats.pro_subcate_id);
-    this.router.navigateByUrl('/productlist?type=subcat&subcategory=' + subcats.pro_subcate_id + '&title=' + subcats.pro_subcate_name);
+    // console.log(subcats.pro_subcate_id);
+    this.router.navigateByUrl('/productlist?type=subcat&category=' + subcats.pro_subcate_category_primary_id + '&subcategory=' + subcats.pro_subcate_id + '&title=' + subcats.pro_subcate_name);
   }
 }

@@ -1,32 +1,54 @@
 <app-login-header [title]="'Products'"></app-login-header>
+
 <ion-content>
     <ion-grid>
       <div id="s-backout-link">
         <div class="a-subheader">
-          <a>
-            <h4>
+          <a class="back-section">
+            <h4 (click)="goBack()">
               <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
               <span>{{subHeader}}</span>
             </h4>
           </a>
+          <span class="a-size-small a-color-secondary a-text-bold rght">{{productCount}} Results found</span>
         </div>
       </div>
 
       <div id="centerBelow">
         <div id="s-slick-result-header" class="a-container sx-rib">
           <div class="a-row a-spacing-none a-grid-vertical-align a-grid-center">
-            <div class="a-column a-span7">
-              <span class="a-size-small a-color-secondary a-text-bold">{{productCount}} Results found</span>
-            </div>
-            <div class="a-column a-span5 a-text-right a-span-last">
-              <a id="sx-top-filter-button" class="a-size-small a-link-normal a-text-bold">Filter
-              </a>
-            </div>
+              <div class="sortoptions brdrgt">
+                <div class="sortinside"> 
+                  <div class="sorttxt" (click)="presentActionSheet()">
+                    <ion-icon name="options"></ion-icon>
+                    Sort
+                  </div>
+                </div>
+              </div>
+              <div class="sortoptions">
+                  <div class="sortinside"> 
+                    <div class="sorttxt" (click)="showFilter()">
+                      <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+                      Filter
+                    </div>
+                  </div>
+              </div>
           </div>
         </div>
       </div>
 
       <ion-row>
+        <ion-refresher slot="fixed" 
+          (ionRefresh)="ionRefresh($event)" 
+          (ionPull)="ionPull($event)" 
+          (ionStart)="ionStart($event)">
+          <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+          </ion-refresher-content>
+        </ion-refresher>
         <ion-col size="6" class='cardProducts' *ngFor="let product of products; let i = index">
             <div class="card-container">
               <div class="outer_img">
@@ -35,7 +57,7 @@
                 </div>
               </div>
               <div class="grid-detail">
-                <h5 class="sx-title"><span class="textProductTitle">{{ product.product_name }}</span></h5>
+                <h5 class="sx-title"><span class="textProductTitle">{{ product.product_name.replace('\\', '') }}</span></h5>
                 <!--<span class="productdesc" [innerHTML]="product.product_short_description"></span>-->
                 <div class="a-row a-spacing-mini a-size-mini a-color-secondary sx-overflow-ellipses"><span>by </span><span>COTTON SHOPY</span></div>
                 <div class="reduction">
@@ -47,6 +69,9 @@
               </div>
             </div>
         </ion-col>
+        <ion-infinite-scroll (ionInfinite)="ionRefresh($event, nextOffset)" loadingSpinner="bubbles" loadingText="Loading Users...">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-row>
     </ion-grid>
 </ion-content>

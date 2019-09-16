@@ -1,0 +1,48 @@
+<ion-content fullscreen>
+    <div class="top-header">
+      <a class="back-icon ptr" (click)="closeModalPopup()"><ion-icon name="arrow-round-back"></ion-icon></a>
+      <div class="fltrtext">
+        <span>Filter</span>
+      </div>
+      <a class="clearfltr ptr" (click)="clearFilter()">clear filter</a>
+    </div>
+  
+    <form onsubmit="processForm(event)">
+      <div class="filter-section">
+        <ion-item>
+          <ion-label position="stacked">Title</ion-label>
+          <ion-input type="text" value="{{filterData.title}}" (ionBlur)="handleinput($event, 'title')"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="categories.length > 0">
+          <ion-label>Select category</ion-label>
+          <ion-select placeholder="category" (ionChange)="handleinput($event, 'category')">
+            <ion-select-option *ngFor="let cat of categories;let i=index;"
+            [value]='cat.pro_cate_id'
+            [selected]="filterData.cat == cat.pro_cate_id">{{cat.pro_cate_name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="filterSubcategories.length > 0">
+          <ion-label>Select subcategory</ion-label>
+          <ion-select placeholder="subcategory"  (ionChange)="handleinput($event, 'subcategory')">
+              <ion-select-option *ngFor="let subcat of filterSubcategories;let i=index;"
+              [value]='subcat.pro_subcate_id'
+              [selected]="filterData.subcat == subcat.pro_subcate_id">{{subcat.pro_subcate_name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-range dualKnobs="true" min="1" max="20000" value="priceValue" color="secondary" (ionChange)="handleinput($event, 'price')">
+              <ion-label slot="start">1</ion-label>
+              <ion-label slot="end">20000</ion-label>
+            </ion-range>
+        </ion-item>
+      </div>
+      <div class="filter-action">
+        <div col="6" class="width50 blkbtn ptr" (click)="closeModalPopup()">
+          <span class="txt">Cancel</span>
+        </div>
+        <div col="6" class="width50 redbtn ptr" (click)="applyFilter()">
+            <span class="txt">Apply</span>
+          </div>
+      </div>
+    </form>
+  </ion-content>      
