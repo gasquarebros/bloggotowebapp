@@ -66,7 +66,7 @@ var WallPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-login-header [title]=\"'wall'\"></app-login-header>\n<ion-content *ngIf=\"userInfo != undefined\">\n    \n    <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n      <ion-fab-button>\n        <ion-icon name=\"add\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-list side=\"top\" horizontal=\"start\" >\n          <ion-button (click)=\"createPost()\">Post on Wall</ion-button>\n          <ion-button (click)=\"goto('products')\">Sell Products</ion-button>\n          <ion-button (click)=\"goto('services')\">Post Services</ion-button>\n        </ion-fab-list>\n    </ion-fab>\n  <ion-item>\n    <ion-avatar>\n      <img src=\"assets/icon/avatar.png\">\n    </ion-avatar>\n    <h6 *ngIf=\"userInfo.customer_username != undefined\">Hi {{userInfo.customer_username}}!</h6>\n  </ion-item>\n  <hr no-padding no-margin>\n  <app-common-post [isProfileType] = \"profileType\"></app-common-post>\n</ion-content>\n<app-common-footer \n    [postProfileType] = 'profileType'\n    (updatePageType) = profileSection($event)></app-common-footer>"
+module.exports = "<app-login-header [title]=\"'wall'\" ></app-login-header>\r\n<ion-content>\r\n    <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n      <ion-fab-button>\r\n        <ion-icon name=\"add\"></ion-icon>\r\n      </ion-fab-button>\r\n      <ion-fab-list side=\"top\" horizontal=\"start\" >\r\n          <ion-button (click)=\"createPost()\">Post on Wall</ion-button>\r\n          <ion-button (click)=\"goto('products')\">Sell Products</ion-button>\r\n          <ion-button (click)=\"goto('services')\">Post Services</ion-button>\r\n        </ion-fab-list>\r\n    </ion-fab>\r\n  <ion-item *ngIf=\"userInfo != undefined && userInfo != null\">\r\n    <ion-avatar>\r\n      <img src=\"assets/icon/avatar.png\">\r\n    </ion-avatar>\r\n    <h6 *ngIf=\"userInfo.customer_username != undefined\">Hi {{userInfo.customer_username}}!</h6>\r\n  </ion-item>\r\n  <hr no-padding no-margin>\r\n  <app-common-post [isProfileType] = \"profileType\"></app-common-post>\r\n</ion-content>\r\n<app-common-footer \r\n    [postProfileType] = 'profileType'\r\n    (updatePageType) = profileSection($event)></app-common-footer>"
 
 /***/ }),
 
@@ -77,7 +77,7 @@ module.exports = "<app-login-header [title]=\"'wall'\"></app-login-header>\n<ion
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-fab-list {\n  margin-left: -66px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvd2FsbC9EOlxcbXlhcHAyL3NyY1xcYXBwXFx3YWxsXFx3YWxsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvd2FsbC93YWxsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1mYWItbGlzdCB7XHJcbiAgbWFyZ2luLWxlZnQ6IC02NnB4O1xyXG59Il19 */"
+module.exports = "ion-fab-list {\n  margin-left: -100px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvd2FsbC9EOlxcYmxvZ2dvdG93ZWJhcHAvc3JjXFxhcHBcXHdhbGxcXHdhbGwucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQW1CLEVBQUEiLCJmaWxlIjoic3JjL2FwcC93YWxsL3dhbGwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWZhYi1saXN0IHtcclxuICBtYXJnaW4tbGVmdDogLTEwMHB4O1xyXG59Il19 */"
 
 /***/ }),
 

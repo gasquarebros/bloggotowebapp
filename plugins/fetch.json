@@ -94,7 +94,7 @@
   "ionic-plugin-deeplinks": {
     "source": {
       "type": "registry",
-      "id": "ionic-plugin-deeplinks"
+      "id": "ionic-plugin-deeplinks@1.0.20"
     },
     "is_top_level": true,
     "variables": {}

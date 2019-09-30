@@ -2,3 +2,5 @@ platforms
 
 # dependencies
 /node_modules
+/platforms
+plugins
