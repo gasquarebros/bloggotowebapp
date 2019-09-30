@@ -41,6 +41,9 @@ export class ServicelistPage implements OnInit {
 
   ionViewWillEnter() {
     this.ngOnInit();
+    setTimeout(() => {
+      this.loadingController.dismiss();
+    }, 200);
   }
   ngOnInit() {
 

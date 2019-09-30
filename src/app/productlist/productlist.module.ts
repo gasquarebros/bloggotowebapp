@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProductlistPage } from './productlist.page';
 import { ShareModulePageModule } from '../share-module/share-module.module';
+import { ProductFilterComponent } from './product-filter/product-filter.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
     ShareModulePageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProductlistPage]
+  declarations: [
+    ProductlistPage,
+    ProductFilterComponent
+  ],
+  entryComponents: [
+    ProductFilterComponent
+  ]
 })
 export class ProductlistPageModule {}

@@ -41,7 +41,8 @@
             <ion-select-option value="sun">Sun</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="cities.length > 0">
+      
+      <ion-item *ngIf="cities.length > 0 && viewloaded == true">
         <ion-label>Select city</ion-label>
         <ion-select placeholder="city"  (ionChange)="handleinput($event, 'city')">
             <ion-select-option *ngFor="let citie of cities;let i=index;"

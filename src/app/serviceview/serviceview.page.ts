@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, ModalController } from '@ionic/angular';
 import { RestApiService } from 'src/app/rest-api.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import * as _ from 'underscore';
 import { Storage } from '@ionic/storage';
+import { BookserviceComponent } from './bookservice/bookservice.component';
 
 @Component({
   selector: 'app-serviceview',
@@ -25,6 +26,7 @@ export class ServiceviewPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public toastCtrl: ToastController,
+    private modalController: ModalController,
     private storage: Storage) { }
 
   ngOnInit() {
@@ -95,6 +97,27 @@ export class ServiceviewPage implements OnInit {
 
   userProfile(customerid) {
     this.router.navigate(['/profile'], { queryParams: { customer: customerid } });
+  }
+
+
+  async showFilter(posts) {
+    this.presentLoadingWithOptions();
+    const modal = await this.modalController.create({
+      component: BookserviceComponent,
+      componentProps: {
+        'posts': posts
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null && dataReturned.data != '' && dataReturned.data != undefined) {
+        /*this.filterData = dataReturned.data;
+        this.updateFilter = !this.updateFilter;
+        this.ref.detectChanges();*/
+      }
+    });
+
+    return await modal.present();
   }
 
 }

@@ -58,8 +58,7 @@
     </div>
 
     <div *ngIf="record.post_embed_video_url">
-        <iframe [src]="checkYouTubeVideo(record.post_embed_video_url)"
-          (load)="checkYouTubeVideo(record.post_embed_video_url)"
+        <iframe [src]="record.youtube"
           width="100%" height="315" frameborder="0" align="middle" allowfullscreen></iframe>
     </div>
     <video *ngIf="record.post_video" class="autoplay" poster="assets/PreviewImage.gif"  width="100%"  controls="controls" muted>

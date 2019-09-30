@@ -1,0 +1,51 @@
+.top-header {
+    height: 52px;
+    background: rgb(40, 116, 240);
+    .back-icon {
+        float: left;
+        padding: 15px;
+        height: 52px;
+        color: white;
+    }
+    .fltrtext {
+        height: 52px;
+        padding: 16px 0px;
+        color: white;
+        width: auto;
+        float: left;
+    }
+    .clearfltr {
+        float: right;
+        padding: 17px;
+        height: 52px;
+        color: white;
+    }
+}
+.filter-section {
+    height: calc(100vh - 104px);
+}
+.ptr {
+    cursor: pointer;
+}
+.filter-action {
+    position: absolute;
+    bottom: 0px;
+    height: 52px;
+    width: 100%;
+    color: white;
+    
+    .width50 {
+        width: 50%;
+        float: left;
+        padding: 16px 0px;
+        text-align: center;
+    }
+    .blkbtn {
+        border-top: 1px solid black;
+        background: black;
+    }
+    .redbtn {
+        background: red;
+        border-top: 1px solid red;
+    }
+}
