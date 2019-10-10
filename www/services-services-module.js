@@ -61,7 +61,7 @@ var ServicesPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-login-header [title]=\"'Services'\"></app-login-header>\n<ion-content padding>\n  <ul class=\"service_category\" *ngIf=\"categories != undefined && categories.length > 0\">\n    <li *ngFor=\"let cats of categories\">\n        <a (click) = \"loadService(cats.ser_cate_slug)\">{{cats.ser_cate_name}}</a>\n    </li>\n  </ul>\n</ion-content>\n"
+module.exports = "<app-login-header [title]=\"'Services'\"></app-login-header>\r\n<ion-content padding>\r\n  <ul class=\"service_category\" *ngIf=\"categories != undefined && categories.length > 0\">\r\n    <li *ngFor=\"let cats of categories\">\r\n        <a (click) = \"loadService(cats)\">{{cats.ser_cate_name}}</a>\r\n    </li>\r\n  </ul>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -72,7 +72,7 @@ module.exports = "<app-login-header [title]=\"'Services'\"></app-login-header>\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".service_category {\n  margin: 0px;\n  padding: 0px; }\n  .service_category li {\n    list-style: none;\n    border: 1px solid black;\n    margin: 0 auto;\n    width: 100%;\n    text-align: center;\n    margin-bottom: 20px;\n    padding: 13px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2VydmljZXMvRDpcXG15YXBwMi9zcmNcXGFwcFxcc2VydmljZXNcXHNlcnZpY2VzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxZQUFZLEVBQUE7RUFGaEI7SUFJUSxnQkFBZ0I7SUFDaEIsdUJBQXVCO0lBQ3ZCLGNBQWM7SUFDZCxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLG1CQUFtQjtJQUNuQixhQUFhLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9zZXJ2aWNlcy9zZXJ2aWNlcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2VydmljZV9jYXRlZ29yeSAge1xyXG4gICAgbWFyZ2luOiAwcHg7XHJcbiAgICBwYWRkaW5nOiAwcHg7XHJcbiAgICBsaSB7XHJcbiAgICAgICAgbGlzdC1zdHlsZTogbm9uZTtcclxuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxuICAgICAgICBtYXJnaW46IDAgYXV0bztcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogMjBweDtcclxuICAgICAgICBwYWRkaW5nOiAxM3B4O1xyXG4gICAgfVxyXG59Il19 */"
+module.exports = ".service_category {\n  margin: 0px;\n  padding: 0px; }\n  .service_category li {\n    list-style: none;\n    border: 1px solid black;\n    margin: 0 auto;\n    width: 100%;\n    text-align: center;\n    margin-bottom: 20px;\n    padding: 13px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2VydmljZXMvRDpcXGJsb2dnb3Rvd2ViYXBwL3NyY1xcYXBwXFxzZXJ2aWNlc1xcc2VydmljZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBVztFQUNYLFlBQVksRUFBQTtFQUZoQjtJQUlRLGdCQUFnQjtJQUNoQix1QkFBdUI7SUFDdkIsY0FBYztJQUNkLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGFBQWEsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3NlcnZpY2VzL3NlcnZpY2VzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zZXJ2aWNlX2NhdGVnb3J5ICB7XHJcbiAgICBtYXJnaW46IDBweDtcclxuICAgIHBhZGRpbmc6IDBweDtcclxuICAgIGxpIHtcclxuICAgICAgICBsaXN0LXN0eWxlOiBub25lO1xyXG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIGJsYWNrO1xyXG4gICAgICAgIG1hcmdpbjogMCBhdXRvO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gICAgICAgIHBhZGRpbmc6IDEzcHg7XHJcbiAgICB9XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -89,9 +89,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth/auth.service */ "./src/app/auth/auth.service.ts");
-/* harmony import */ var _rest_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../rest-api.service */ "./src/app/rest-api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth/auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _rest_api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rest-api.service */ "./src/app/rest-api.service.ts");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+
+
 
 
 
@@ -99,12 +102,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ServicesPage = /** @class */ (function () {
-    function ServicesPage(loadingController, api, authService, route, toastCtrl) {
+    function ServicesPage(loadingController, api, authService, route, toastCtrl, router, navCtrl, storage) {
         this.loadingController = loadingController;
         this.api = api;
         this.authService = authService;
         this.route = route;
         this.toastCtrl = toastCtrl;
+        this.router = router;
+        this.navCtrl = navCtrl;
+        this.storage = storage;
         this.appid = 'BloggotoApp';
     }
     ServicesPage.prototype.ngOnInit = function () {
@@ -118,6 +124,7 @@ var ServicesPage = /** @class */ (function () {
             _this.categories = [];
             _this.fetchCategories();
         });
+        this.getMasterData();
         this.presentLoadingWithOptions();
     };
     ServicesPage.prototype.presentLoadingWithOptions = function () {
@@ -167,6 +174,7 @@ var ServicesPage = /** @class */ (function () {
                 var response = res.body;
                 if (response.status === 'success') {
                     _this.categories = response.html;
+                    _this.storage.set('service_category', _this.categories);
                 }
                 _this.loadingController.dismiss();
             }
@@ -175,15 +183,70 @@ var ServicesPage = /** @class */ (function () {
         });
     };
     ServicesPage.prototype.loadService = function (cat) {
+        this.navCtrl.navigateRoot(['servicelist'], { queryParams: { 'type': 'category', 'category_id': cat.ser_cate_primary_id } });
+        //this.router.navigate(['/servicelist', ], { queryParams: { 'type': 'category', 'category_id': cat.ser_cate_primary_id } });
     };
+    ServicesPage.prototype.getMasterData = function () {
+        var _this = this;
+        this.storage.get('service_subcategory').then(function (val) {
+            console.log(val);
+            if (val == null) {
+                _this.fetchsubcategories();
+            }
+        });
+        this.storage.get('country').then(function (val) {
+            if (val == null) {
+                var data = '/countries?type=all';
+                _this.authService.fetchMasterData(data);
+            }
+            else {
+                var data_1 = '/countries?type=state';
+                _this.storage.get('state').then(function (val) {
+                    if (val == null) {
+                        _this.authService.fetchMasterData(data_1);
+                    }
+                });
+                var cdata_1 = '/countries?type=city';
+                _this.storage.get('city').then(function (val) {
+                    if (val == null) {
+                        _this.authService.fetchMasterData(cdata_1);
+                    }
+                });
+            }
+        });
+    };
+    ServicesPage.prototype.fetchsubcategories = function () {
+        var _this = this;
+        this.api.getStaticData('restservices/subcategories?app_id=' + this.appid, []).subscribe(function (result) {
+            var res = result;
+            if (res.body !== undefined) {
+                var response = res.body;
+                if (response.status === 'success') {
+                    _this.storage.set('service_subcategory', response.html);
+                }
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myNav'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"])
+    ], ServicesPage.prototype, "nav", void 0);
     ServicesPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-services',
             template: __webpack_require__(/*! ./services.page.html */ "./src/app/services/services.page.html"),
             styles: [__webpack_require__(/*! ./services.page.scss */ "./src/app/services/services.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"], _rest_api_service__WEBPACK_IMPORTED_MODULE_4__["RestApiService"],
-            _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
+            _rest_api_service__WEBPACK_IMPORTED_MODULE_5__["RestApiService"],
+            _auth_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"]])
     ], ServicesPage);
     return ServicesPage;
 }());

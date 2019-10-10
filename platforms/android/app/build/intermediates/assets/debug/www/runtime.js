@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"common":"common","account-account-module":"account-account-module","draft-posts-draft-posts-module":"draft-posts-draft-posts-module","home-home-module":"home-home-module","launch-launch-module":"launch-launch-module","list-list-module":"list-list-module","login-login-module":"login-login-module","products-products-module":"products-products-module","profile-profile-module":"profile-profile-module","services-services-module":"services-services-module","signup-signup-module":"signup-signup-module","static-static-module":"static-static-module","wall-wall-module":"wall-wall-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"common":"common","account-account-module":"account-account-module","draft-posts-draft-posts-module":"draft-posts-draft-posts-module","home-home-module":"home-home-module","launch-launch-module":"launch-launch-module","list-list-module":"list-list-module","login-login-module":"login-login-module","productlist-productlist-module":"productlist-productlist-module","products-products-module":"products-products-module","profile-profile-module":"profile-profile-module","servicelist-servicelist-module":"servicelist-servicelist-module","services-services-module":"services-services-module","serviceview-serviceview-module":"serviceview-serviceview-module","signup-signup-module":"signup-signup-module","static-static-module":"static-static-module","wall-wall-module":"wall-wall-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
