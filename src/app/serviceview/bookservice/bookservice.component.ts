@@ -1,9 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
 import { ModalController, NavParams, LoadingController } from '@ionic/angular';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import * as _ from 'underscore';
 import { BookingData } from './booking-data.model';
 import * as moment from 'moment';
+import { RestApiService } from './../../rest-api.service';
 
 @Component({
   selector: 'app-bookservice',
@@ -23,13 +25,68 @@ export class BookserviceComponent implements OnInit, AfterViewInit {
 
   public modelData: BookingData;
 
+  public formError: string;
+  validations_form: FormGroup;
+  validation_messages = {
+    'startDate': [
+      { type: 'required', message: 'Start Date is required.' },
+    ],
+    'endDate': [
+      { type: 'required', message: 'End Date is required.' },
+    ],
+    'startTime': [
+      { type: 'required', message: 'Start Time is required.' }
+    ],
+    'endTime': [
+      { type: 'required', message: 'End Time is required.' }
+    ],
+    'address1': [
+      { type: 'required', message: 'Address is required.' }
+    ],
+    'state': [
+      { type: 'required', message: 'State is required.' },
+    ],
+    'city': [
+      { type: 'required', message: 'City is required.' },
+    ],
+    'zipcode': [
+      { type: 'required', message: 'Zipcode is required.' },
+    ],
+  };
 
   constructor(private modalController: ModalController,
     public navParams: NavParams,
     public loadingController: LoadingController,
+    public formBuilder: FormBuilder,
+    private api: RestApiService,
     public storage: Storage) { }
 
   ngOnInit() {
+
+    this.validations_form = this.formBuilder.group({
+      startDate: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      address1: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      state: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      city: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      zipcode: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      endDate: new FormControl(''),
+      startTime: new FormControl(''),
+      endTime: new FormControl(''),
+      address2: new FormControl( ''),
+      landmark: new FormControl( ''),
+      additional: new FormControl( ''),
+    });
+
     this.minDate = moment().add(1, 'days').format('YYYY-MM-DD');
     this.endMinDate = this.minDate;
     this.modelData = new BookingData();
@@ -52,6 +109,18 @@ export class BookserviceComponent implements OnInit, AfterViewInit {
     this.storage.get('city').then((val) => {
       this.overallCities = val;
     });
+
+    if(this.posts.ser_pricet_type == 'day' || this.posts.ser_pricet_type == 'hour') {
+      const endDate = this.validations_form.get('endDate');
+      endDate.setValidators([Validators.required]);
+      if(this.posts.ser_pricet_type == 'hour') {
+        const startTime = this.validations_form.get('startTime');
+        startTime.setValidators([Validators.required]);
+        const endTime = this.validations_form.get('endTime');
+        endTime.setValidators([Validators.required]);
+        
+      }
+    }
   }
 
   calculateTimeRange(startHour, startMin, endHour, endMin) {
@@ -106,18 +175,6 @@ export class BookserviceComponent implements OnInit, AfterViewInit {
     if(field == 'state') {
       this.filterCities(parseInt(data.target.value));
     }
-    /*if(field == 'title') {
-      this.filterData.title = data.target.value;
-    } else if(field == 'category') {
-      this.filterData.category = data.target.value;
-      this.updateSubcategory();
-    } else if(field == 'subcategory') {
-      this.filterData.subcategory = data.target.value;
-    } else if(field == 'availability') {
-      this.filterData.availability = data.target.value;
-    } else if(field == 'city') {
-      this.filterData.city = data.target.value;
-    }*/
   }
 
   filterCities(state) {
@@ -133,7 +190,18 @@ export class BookserviceComponent implements OnInit, AfterViewInit {
   }
 
   processForm(data) {
-    console.log(data);
+    this.api.postData('restservices/bookservice', this.modelData).subscribe(result => {
+      const res: any = result;
+      if (res !== undefined) {
+        console.log(res.status);
+        if (res.status === 'success') {
+        } else {
+          this.formError = res[0].message;
+        }
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
   closeModalPopup() {

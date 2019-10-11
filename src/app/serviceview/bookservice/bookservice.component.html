@@ -6,71 +6,127 @@
       </div>
     </div>
 
-    <form onsubmit="processForm(event)">
+    <form [formGroup]="validations_form"  (ngSubmit)="processForm(validations_form.value)">
       <div class="filter-section">
         <ion-item>
           <ion-label position="stacked">Start Date</ion-label>
-          <ion-datetime displayFormat="DD-MM-YYYY" (ionChange)="handleinput($event, 'startDate')" [min]="minDate" name="startDate" [(ngModel)]="modelData.startDate"  placeholder="Select Service Start Date"></ion-datetime>
+          <ion-datetime displayFormat="DD-MM-YYYY" required (ionChange)="handleinput($event, 'startDate')" [min]="minDate" formControlName="startDate" [(ngModel)]="modelData.startDate"  placeholder="Select Service Start Date"></ion-datetime>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.startDate">
+              <div class="error-message" *ngIf="validations_form.get('startDate').hasError(validation.type) && (validations_form.get('startDate').dirty || validations_form.get('startDate').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         <ion-item *ngIf="posts.ser_pricet_type == 'day' || posts.ser_pricet_type == 'hour'">
             <ion-label position="stacked">End Date</ion-label>
-            <ion-datetime displayFormat="DD-MM-YYYY" [min]="endMinDate" name="endDate" [(ngModel)]="modelData.endDate"  placeholder="Select Service End Date"></ion-datetime>
+            <ion-datetime displayFormat="DD-MM-YYYY" [min]="endMinDate" formControlName="endDate" [(ngModel)]="modelData.endDate" required placeholder="Select Service End Date"></ion-datetime>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.endDate">
+                <div class="error-message" *ngIf="validations_form.get('endDate').hasError(validation.type) && (validations_form.get('endDate').dirty || validations_form.get('endDate').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
         </ion-item>
         <ion-item *ngIf="posts.ser_pricet_type == 'hour'">
           <ion-label>Select Time Range</ion-label>
-          <ion-select placeholder="Select Time Range" name="startTime" [(ngModel)]="modelData.startTime" (ionChange)="handleinput($event, 'startTime')">
+          <ion-select required placeholder="Select Time Range" formControlName="startTime" [(ngModel)]="modelData.startTime" (ionChange)="handleinput($event, 'startTime')">
               <ion-select-option *ngFor="let startRange of timeRange;let i=index;"
               [value]='startRange.value'>{{startRange.label}}</ion-select-option>
           </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.startTime">
+              <div class="error-message" *ngIf="validations_form.get('startTime').hasError(validation.type) && (validations_form.get('startTime').dirty || validations_form.get('startTime').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         <ion-item *ngIf="posts.ser_pricet_type == 'hour'">
           <ion-label>Select Time Range</ion-label>
-          <ion-select placeholder="Select Time Range" name="endTime" [(ngModel)]="modelData.endTime" (ionChange)="handleinput($event, 'endTime')">
+          <ion-select required placeholder="Select Time Range" formControlName="endTime" [(ngModel)]="modelData.endTime" (ionChange)="handleinput($event, 'endTime')">
               <ion-select-option *ngFor="let endRange of timeEndRange;let i=index;"
               [value]='endRange.value'>{{endRange.label}}</ion-select-option>
           </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.endTime">
+              <div class="error-message" *ngIf="validations_form.get('endTime').hasError(validation.type) && (validations_form.get('endTime').dirty || validations_form.get('endTime').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Address Line1</ion-label>
-          <ion-input type="text" value="" name="address1" [(ngModel)]="modelData.address1" (ionBlur)="handleinput($event, 'address1')"></ion-input>
+          <ion-input required type="text" value="" formControlName="address1" [(ngModel)]="modelData.address1" (ionBlur)="handleinput($event, 'address1')"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.address1">
+              <div class="error-message" *ngIf="validations_form.get('address1').hasError(validation.type) && (validations_form.get('address1').dirty || validations_form.get('address1').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Address Line2</ion-label>
-          <ion-input type="text" value="" name="address2" [(ngModel)]="modelData.address2" (ionBlur)="handleinput($event, 'address2')"></ion-input>
+          <ion-input type="text" value="" formControlName="address2" [(ngModel)]="modelData.address2" (ionBlur)="handleinput($event, 'address2')"></ion-input>
         </ion-item>
         <ion-item *ngIf="states.length > 0 && viewloaded == true">
           <ion-label>Select State</ion-label>
-          <ion-select placeholder="state" name="state" [(ngModel)]="modelData.state" (ionChange)="handleinput($event, 'state')">
+          <ion-select required placeholder="state" formControlName="state" [(ngModel)]="modelData.state" (ionChange)="handleinput($event, 'state')">
               <ion-select-option *ngFor="let state of states;let i=index;"
             [value]='state.id'>{{state.varStateName}}</ion-select-option>
           </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.state">
+              <div class="error-message" *ngIf="validations_form.get('state').hasError(validation.type) && (validations_form.get('state').dirty || validations_form.get('state').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         
         <ion-item *ngIf="cities.length > 0 && viewloaded == true">
           <ion-label>Select city</ion-label>
-          <ion-select placeholder="city" name="city" [(ngModel)]="modelData.city" (ionChange)="handleinput($event, 'city')">
+          <ion-select required placeholder="city" formControlName="city" [(ngModel)]="modelData.city" (ionChange)="handleinput($event, 'city')">
               <ion-select-option *ngFor="let citie of cities;let i=index;"
             [value]='citie.city_id'>{{citie.city_name}}</ion-select-option>
           </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.city">
+              <div class="error-message" *ngIf="validations_form.get('city').hasError(validation.type) && (validations_form.get('city').dirty || validations_form.get('city').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Zipcode</ion-label>
-          <ion-input type="text" value="" name="zipcode" [(ngModel)]="modelData.zipcode" (ionBlur)="handleinput($event, 'zipcode')"></ion-input>
+          <ion-input required type="text" value="" formControlName="zipcode" [(ngModel)]="modelData.zipcode" (ionBlur)="handleinput($event, 'zipcode')"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.zipcode">
+              <div class="error-message" *ngIf="validations_form.get('zipcode').hasError(validation.type) && (validations_form.get('zipcode').dirty || validations_form.get('zipcode').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Landmark</ion-label>
-          <ion-input type="text" value="" name="landmark" [(ngModel)]="modelData.landmark" (ionBlur)="handleinput($event, 'landmark')"></ion-input>
+          <ion-input type="text" value="" formControlName="landmark" [(ngModel)]="modelData.landmark" (ionBlur)="handleinput($event, 'landmark')"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Additonal message</ion-label>
-          <ion-input type="text" value="" name="additional" [(ngModel)]="modelData.additional" (ionBlur)="handleinput($event, 'additional')"></ion-input>
+          <ion-input type="text" value="" formControlName="additional" [(ngModel)]="modelData.additional" (ionBlur)="handleinput($event, 'additional')"></ion-input>
         </ion-item> 
       </div>
       <div class="filter-action">
         <div col="6" class="width50 blkbtn ptr" (click)="closeModalPopup()">
           <span class="txt">Cancel</span>
         </div>
-        <button col="6"  type="submit" class="width50 redbtn ptr">
+        <button col="6" [disabled]="!validations_form.valid" type="submit" class="width50 redbtn ptr">
           Book Now
         </button>
       </div>

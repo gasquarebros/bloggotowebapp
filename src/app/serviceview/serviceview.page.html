@@ -30,7 +30,8 @@
       <p>{{posts.ser_description}}</p>
     </div>
     <p>
-        <ion-button (click)="showFilter(posts)" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Book now</ion-button>
+        <ion-button  *ngIf="userInfo !== null" (click)="showFilter(posts)" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Book now</ion-button>
+        <ion-button  *ngIf="userInfo == null" (click)="redirectLogin()" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Login Now to Book</ion-button>
     </p>
     <div class="providersection" >
       <ion-avatar slot="start" class="ios hydrated" (click)="userProfile(posts.customer_username)">

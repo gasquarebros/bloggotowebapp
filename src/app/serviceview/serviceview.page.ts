@@ -19,6 +19,7 @@ export class ServiceviewPage implements OnInit {
   public posts: any =[];
   public slideOpts: any;
   public overallCities: any = [];
+  public userInfo: any;
 
   constructor(public loadingController: LoadingController,
     private api: RestApiService,
@@ -52,6 +53,10 @@ export class ServiceviewPage implements OnInit {
       } else {
         this.overallCities = val;
       }
+    });
+
+    this.authService.getUserInfo().then(items => {
+      this.userInfo = items;
     });
   }
 
@@ -97,6 +102,10 @@ export class ServiceviewPage implements OnInit {
 
   userProfile(customerid) {
     this.router.navigate(['/profile'], { queryParams: { customer: customerid } });
+  }
+
+  redirectLogin() {
+    this.router.navigate(['/login']);
   }
 
 
