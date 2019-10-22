@@ -1,0 +1,204 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Manage Service
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="validations_form" (ngSubmit)="addService(validations_form.value)">
+    <div class="validation-errors" [innerHTML]="formError">
+    </div>
+
+    <ion-item *ngIf="categories.length > 0">
+      <ion-label>Select category</ion-label>
+      <ion-select formControlName="category" placeholder="category" (ionChange)="handleinput($event, 'category')">
+        <ion-select-option *ngFor="let cat of categories;let i=index;"
+        [value]='cat.ser_cate_primary_id'
+        [selected]="filterData.category == cat.ser_cate_primary_id">{{cat.ser_cate_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.category">
+        <div class="error-message" *ngIf="validations_form.get('category').hasError(validation.type) && (validations_form.get('category').dirty || validations_form.get('category').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item *ngIf="subcategories.length > 0">
+      <ion-label>Select subcategory</ion-label>
+      <ion-select formControlName="subcategory" placeholder="subcategory"  (ionChange)="handleinput($event, 'subcategory')">
+          <ion-select-option *ngFor="let subcat of subcategories;let i=index;"
+          [value]='subcat.pro_subcate_primary_id'
+          [selected]="filterData.subcategory == subcat.ser_cate_primary_id">{{subcat.pro_subcate_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.subcategory">
+        <div class="error-message" *ngIf="validations_form.get('subcategory').hasError(validation.type) && (validations_form.get('subcategory').dirty || validations_form.get('subcategory').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input  formControlName="title" placeholder="Title"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.title">
+        <div class="error-message" *ngIf="validations_form.get('title').hasError(validation.type) && (validations_form.get('title').dirty || validations_form.get('title').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input  formControlName="description" placeholder="Description"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.description">
+        <div class="error-message" *ngIf="validations_form.get('description').hasError(validation.type) && (validations_form.get('description').dirty || validations_form.get('description').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      {{filterData.priceType}}
+      <ion-label>Select Price Type</ion-label>
+      <ion-select formControlName="priceType" placeholder="price Type"  (ionChange)="handleinput($event, 'priceType')">
+          <ion-select-option [value]='"day"' [selected]="filterData.priceType == 'day'">Day</ion-select-option>
+          <ion-select-option [value]='"hour"' [selected]="filterData.priceType == 'hour'">Hour</ion-select-option>
+          <ion-select-option [value]='"per session"'[selected]="filterData.priceType == 'per session'">Per Session</ion-select-option>
+          <ion-select-option [value]='"per visit"'[selected]="filterData.priceType == 'per visit'">Per Visit</ion-select-option>
+      </ion-select>
+    </ion-item>
+    {{validations_form.get('priceType').value}}
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.priceType">
+        <div class="error-message" *ngIf="validations_form.get('priceType').hasError(validation.type) && (validations_form.get('priceType').dirty || validations_form.get('priceType').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item *ngIf="validations_form.get('priceType').value == 'per session'">
+      <ion-input  formControlName="numberBookings" placeholder="No. of Bookings"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Day Start Time</ion-label>
+      <ion-select formControlName="startTime" placeholder="Start Time"  (ionChange)="handleinput($event, 'startTime')">
+          <ion-select-option [value]='day'[selected]="filterData.startTime == 'day'">Day</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.startTime">
+        <div class="error-message" *ngIf="validations_form.get('startTime').hasError(validation.type) && (validations_form.get('startTime').dirty || validations_form.get('startTime').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label>Day End Time</ion-label>
+      <ion-select formControlName="endTime" placeholder="End Time"  (ionChange)="handleinput($event, 'endTime')">
+          <ion-select-option [value]='day'[selected]="filterData.endTime == 'day'">Day</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.endTime">
+        <div class="error-message" *ngIf="validations_form.get('endTime').hasError(validation.type) && (validations_form.get('endTime').dirty || validations_form.get('endTime').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input  formControlName="price" placeholder="Price"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.price">
+        <div class="error-message" *ngIf="validations_form.get('price').hasError(validation.type) && (validations_form.get('price').dirty || validations_form.get('price').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label>Discount Price</ion-label>
+      <ion-input  formControlName="discountprice" placeholder="Discount Price"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.discountprice">
+        <div class="error-message" *ngIf="validations_form.get('price').hasError(validation.type) && (validations_form.get('discountprice').dirty || validations_form.get('discountprice').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label>Select availability</ion-label>
+      <ion-select multiple formControlName="availability" placeholder="availability"  (ionChange)="handleinput($event, 'availability')">
+          <ion-select-option value="mon">Mon</ion-select-option>
+          <ion-select-option value="tue">Tue</ion-select-option>
+          <ion-select-option value="wed">Wed</ion-select-option>
+          <ion-select-option value="thu">Thu</ion-select-option>
+          <ion-select-option value="fri">Fri</ion-select-option>
+          <ion-select-option value="sat">Sat</ion-select-option>
+          <ion-select-option value="sun">Sun</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.availability">
+        <div class="error-message" *ngIf="validations_form.get('availability').hasError(validation.type) && (validations_form.get('availability').dirty || validations_form.get('availability').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    
+    <ion-item *ngIf="cities.length > 0">
+      <ion-label>Select city</ion-label>
+      <ion-select multiple formControlName="city" placeholder="city"  (ionChange)="handleinput($event, 'city')">
+          <ion-select-option *ngFor="let citie of cities;let i=index;"
+          [value]='citie.city_id'>{{citie.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.city">
+        <div class="error-message" *ngIf="validations_form.get('city').hasError(validation.type) && (validations_form.get('city').dirty || validations_form.get('city').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+
+    <ion-item>
+      <ion-label>Select Status</ion-label>
+      <ion-select formControlName="status" placeholder="status"  (ionChange)="handleinput($event, 'status')">
+          <ion-select-option value="A" [selected]="filterData.status == 'A'">Active</ion-select-option>
+          <ion-select-option value="I" [selected]="filterData.status == 'I'">Inactive</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.status">
+        <div class="error-message" *ngIf="validations_form.get('status').hasError(validation.type) && (validations_form.get('status').dirty || validations_form.get('status').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+
+    <hr>
+
+    <ion-item class="filter-action">
+        <ion-button col="6"  class="buttons width50 blkbtn ptr" type="submit" [disabled]="!validations_form.valid">Submit</ion-button>
+        <ion-button col="6"  class="buttons width50 redbtn ptr" (click)="OpenSignup()">cancel</ion-button>
+    </ion-item>
+  </form>
+</ion-content>

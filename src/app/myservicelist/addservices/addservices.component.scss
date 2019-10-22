@@ -1,0 +1,24 @@
+
+.validation-errors {
+    color: red;
+    font-size: 11px;
+}
+.validation-errors p {
+    margin: 0px 2px 0px 0px;
+}
+
+.filter-action {
+    bottom: 0px;
+    height: 52px;
+    width: 100%;
+    color: white;
+    float: left;
+    
+    .width50 {
+        width: 50%;
+        float: left;
+        margin-bottom: 20px;
+        text-align: center;
+        height: 35px;
+    }
+}

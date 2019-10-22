@@ -1,0 +1,50 @@
+<app-login-header [title]="'My Services'" ></app-login-header>
+<h2 class="heading">Services <span class="fr"><ion-icon name="add-circle-outline" (click)="addService()"></ion-icon></span></h2>
+<!--<div class="sorting_options">
+  <div class="sortoptions brdrgt">
+    <div class="sortinside"> 
+      <div class="sorttxt" (click)="presentActionSheet()">
+        <ion-icon name="options"></ion-icon>
+        Sort
+      </div>
+    </div>
+  </div>
+  <div class="sortoptions">
+      <div class="sortinside"> 
+        <div class="sorttxt" (click)="showFilter()">
+          <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+          Filter
+        </div>
+      </div>
+  </div>
+</div>-->
+<ion-content>
+  <ion-card no-margin class="card">
+    <ion-row>
+      <ion-col col-10>      
+        <ion-list lines="none">  
+          <ion-item>
+            <ion-avatar>
+                img
+            </ion-avatar>
+            <div class="item-inner">
+              <div class="input-wrapper">
+                <ion-label class="label label-ios">
+                  <h2 class="username" style="font-weight: bold">Title</h2>
+                  <p class="post-category" >Category</p>
+                  <ion-note style="font-size: 12px">Description
+                  </ion-note>
+                </ion-label>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col >
+      <ion-col col-2>
+        <button no-margin no-padding clear color="black" ion-button icon-only style="float: right; top: 15px" (click)="presentPostPopover(record)">
+          <ion-icon name="more"></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>  
+</ion-content>

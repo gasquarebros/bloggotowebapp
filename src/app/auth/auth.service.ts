@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
 export class AuthService {
   // AUTH_SERVER_ADDRESS  =  'https://cors-anywhere.herokuapp.com/https://www.bloggoto.com/api';
   // AUTH_SERVER_ADDRESS  =  'http://localhost/bloggotoweb/api';
-  AUTH_SERVER_ADDRESS  =  'http://www.bloggoto.com/api';
+  AUTH_SERVER_ADDRESS  =  'https://www.bloggoto.com/api';
   authSubject  =  new  BehaviorSubject(false);
 
   constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }

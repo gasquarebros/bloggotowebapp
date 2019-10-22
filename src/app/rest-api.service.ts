@@ -12,7 +12,7 @@ const httpOptions = {
 };
 // const apiUrl = 'http://localhost/bloggotoweb/';
 // const apiUrl = 'http://192.168.1.11/bloggotoweb/';
-const apiUrl = 'http://www.bloggoto.com/';
+const apiUrl = 'https://www.bloggoto.com/';
 // const apiUrl = 'https://cors-anywhere.herokuapp.com/http://www.bloggoto.com/';
 
 @Injectable({
