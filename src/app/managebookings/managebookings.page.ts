@@ -6,17 +6,16 @@ import { AuthService } from '../auth/auth.service';
 import { RestApiService } from '../rest-api.service';
 
 @Component({
-  selector: 'app-myservicelist',
-  templateUrl: './myservicelist.page.html',
-  styleUrls: ['./myservicelist.page.scss'],
+  selector: 'app-managebookings',
+  templateUrl: './managebookings.page.html',
+  styleUrls: ['./managebookings.page.scss'],
   providers: [AuthService]
 })
-export class MyservicelistPage implements OnInit {
+export class ManagebookingsPage implements OnInit {
 
   public userInfo: any = null;
 
-  constructor(
-    private menu: MenuController,
+  constructor(private menu: MenuController,
     public api: RestApiService,
     private router: Router,
     public authService: AuthService,
@@ -31,7 +30,6 @@ export class MyservicelistPage implements OnInit {
     });
   }
 
-
   
   async presentLoadingWithOptions() {
     const loading = await this.loadingController.create({
@@ -41,46 +39,6 @@ export class MyservicelistPage implements OnInit {
       cssClass: 'custom-class custom-loading'
     });
     return await loading.present();
-  }
-
-  async presentActionSheet(serviceID) {
-    
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Action',
-      buttons: [{
-        text: 'Edit',
-        icon: 'create',
-        handler: () => {
-          this.router.navigate(['/myservicelist/addservice', { queryParams: { id: serviceID } }]);
-        }
-      }, {
-        text: 'Delete',
-        icon: 'trash',
-        handler: () => {
-          this.deleteServices(serviceID);
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
-
-  async showFilter() {
-    this.presentLoadingWithOptions();
-  }
-
-  addService() {
-    // this.router.navigate(['/questions/thankyou'], { queryParams: { percent: '90' , participationId: 1, language: this.questionLanguage} });
-    this.router.navigate(['/myservicelist/addservice']);
-  }
-
-  deleteServices(serviceID) {
-    console.log(serviceID);
   }
 
   ionRefresh(event, offset) {

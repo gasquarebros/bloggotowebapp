@@ -82,14 +82,15 @@ export class AppComponent {
     }, 100);
   }
   logout() {
+    this.menuCtrl.close('content1');
     this.authService.removeUserInfo();
     this.router.navigateByUrl('/login');
   }
   profile() {
-    this.menuCtrl.close();
+    this.menuCtrl.close('content1');
   }
   draftRedirect(type) {
-    this.menuCtrl.close();
+    this.menuCtrl.close('content1');
     this.router.navigateByUrl('/draft-posts?type=' + type);
   }
 }

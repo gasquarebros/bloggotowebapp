@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu contentId="content1" side="start">
+  <ion-menu contentId="content1" menuId="content1" type="overlay" class="my-custom-menu" side="start">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu</ion-title>
@@ -31,15 +31,6 @@
         <ion-item>
           <button menuClose ion-item class="menu"  style="font-size:16px; background:none;" (click)="draftRedirect('Favourites')" sstyle="font-size:20px; background:none;">Favourites</button>
         </ion-item> 
-        <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Purchases</a>
-        </ion-item>
-        <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Bookings</a>
-        </ion-item>
-        <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">Bank Details</a>
-        </ion-item>
         <ion-item-divider color="secondary">
           <ion-label>
             Manage
@@ -49,16 +40,13 @@
           <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Sales</a>
         </ion-item>
         <ion-item>
-          <button menuClose ion-item class="menu" [routerLink]="['/myservicelist']" routerDirection="root" style="font-size:16px; background:none;">My Services</button>
+          <a menuClose ion-item class="menu" style="font-size:16px; background:none;"> Manage Orders </a>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;"> Orders Received</a>
+          <button menuClose ion-item class="menu"  (click)="profile()" [routerLink]="['/myservicelist']" routerDirection="root" style="font-size:16px; background:none;">My Services</button>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">Bookings Received</a>
-        </ion-item>
-        <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">Bookings Received</a>
+          <button menuClose ion-item class="menu" (click)="profile()" [routerLink]="['/managebookings']" routerDirection="root" style="font-size:16px; background:none;"> Manage Bookings </button>
         </ion-item>
       </ion-list>
     </ion-content>

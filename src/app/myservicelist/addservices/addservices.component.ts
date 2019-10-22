@@ -224,4 +224,8 @@ export class AddservicesComponent implements OnInit {
 
   }
 
+  goBack() {
+    this.router.navigate(['/myservicelist']);
+  }
+
 }

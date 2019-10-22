@@ -1,5 +1,5 @@
-<app-login-header [title]="'My Services'" ></app-login-header>
-<h2 class="heading">Services <span class="fr"><ion-icon name="add-circle-outline" (click)="addService()"></ion-icon></span></h2>
+<app-login-header [title]="'Manage Bookings'"></app-login-header>
+<h2 class="heading">My Bookings</h2>
 <!--<div class="sorting_options">
   <div class="sortoptions brdrgt">
     <div class="sortinside"> 
@@ -24,15 +24,18 @@
       <ion-col col-10>      
         <ion-list lines="none">  
           <ion-item>
-            <ion-avatar>
-                img
-            </ion-avatar>
             <div class="item-inner">
               <div class="input-wrapper">
                 <ion-label class="label label-ios">
                   <h2 class="username" style="font-weight: bold">Title</h2>
-                  <p class="post-category" >Category</p>
-                  <ion-note style="font-size: 12px">Description
+                  <p>Order No. : 151218101438F617 </p>
+                  <p class="post-category" >Category - subcategory</p>
+                  <ion-note style="font-size: 12px">
+                    <p>Service Date: 17-12-2018 - 17-12-2018</p>
+                    <p>Amount: ₹122.00/day</p>
+                    <p>City: Bangalore</p>
+                    <p>Created: 15-12-2018</p>
+                    <p>Status: Rejected</p>
                   </ion-note>
                 </ion-label>
               </div>
@@ -41,8 +44,9 @@
         </ion-list>
       </ion-col >
       <ion-col col-2>
-        <button no-margin no-padding clear color="black" ion-button icon-only style="float: right; top: 15px" (click)="presentActionSheet('Mwn')">
-          <ion-icon name="more"></ion-icon>
+        <button no-margin no-padding clear color="black" ion-button icon-only style="float: right; top: 15px; font-size: 30px">
+          <ion-icon name="cash"></ion-icon>
+          <!--<ion-icon name="eye"></ion-icon>-->
       </button>
       </ion-col>
     </ion-row>
