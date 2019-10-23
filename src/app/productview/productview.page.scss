@@ -1,0 +1,98 @@
+.productTitlesection {
+    margin: 10px 0px;
+    .providername {
+        line-height: 20px;
+        font-size: 14px;
+        color: #212121;
+        cursor: pointer;
+    }
+    p {
+        line-height: 20px;
+        font-size: 14px;
+        color: #212121;
+        margin-top: 0px;
+        font-weight: bold;
+        
+    }
+}
+
+.pricing {
+    margin-top: 14px;
+    .price {
+        color:red;
+        margin-right: 10px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .old-price {
+        margin-right: 10px;
+        color: #717171;
+        text-decoration: line-through;
+        font-size: 13px;
+    }
+}
+.description {
+    position: relative;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    font-size: 13px;
+}
+.attributes_section {
+    margin-top: 10px;
+}
+
+ion-card {
+padding: 0px;
+    margin: 0px 0px 8px;
+    ion-card-header {
+        padding: 10px 20px;
+        ion-card-title {
+            font-size: 15px;
+            span {
+                color: #2196fe;
+                font-size: 13px;
+            }
+        }
+    }
+}
+ion-card-content {
+    margin: 0px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 5px 0;
+    padding-left: 8px;
+    white-space: nowrap;
+    ion-chip {
+        position: relative;
+        display: inline-block;
+        background: #fff;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,.1);
+        box-shadow: 0 1px 1px 1px rgba(0,0,0,.1);
+        /* margin-right: 10px; */
+        /* padding: 10px; */
+        /* min-width: 70px; */
+        text-align: center;
+        border: 1px solid transparent;
+        font-size: 12px;
+        max-width: 150px;
+        overflow: hidden;
+        height: 100%;
+    }
+    .active {
+        border-bottom: 2px solid #2196fe;
+    }
+}
+.white {
+    color: white;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}

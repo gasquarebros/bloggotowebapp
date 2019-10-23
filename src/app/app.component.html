@@ -37,10 +37,10 @@
           </ion-label>
         </ion-item-divider>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;">My Sales</a>
+          <button menuClose ion-item class="menu"  (click)="profile()" [routerLink]="['/home']" routerDirection="root" style="font-size:16px; background:none;">My Sales</button>
         </ion-item>
         <ion-item>
-          <a menuClose ion-item class="menu" style="font-size:16px; background:none;"> Manage Orders </a>
+          <button menuClose ion-item class="menu" style="font-size:16px; background:none;">Manage Orders</button>
         </ion-item>
         <ion-item>
           <button menuClose ion-item class="menu"  (click)="profile()" [routerLink]="['/myservicelist']" routerDirection="root" style="font-size:16px; background:none;">My Services</button>
@@ -52,6 +52,7 @@
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="content1" main></ion-router-outlet>
+ 
 </ion-app>
 
 

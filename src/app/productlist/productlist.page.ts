@@ -46,7 +46,7 @@ export class ProductlistPage implements OnInit {
     this.subHeader = (queryParams.title)?queryParams.title:'Products';
     let searchString  = '?app_id=' + this.appid;
     if (queryParams.type === 'subcat') {
-      this.filterData.cat = queryParams.category;
+      this.filterData.type = queryParams.category;
       this.filterData.subcat = queryParams.subcategory;
     }
     this.fetchProducts();
@@ -92,8 +92,8 @@ export class ProductlistPage implements OnInit {
     if (this.filterData.price_to != '') {
       searchString += '&price_to=' + this.filterData.price_to;
     }
-    if(this.sort !='') {
-      searchString += '&sortb='+ this.sort;
+    if(this.sort != undefined && this.sort !='') {
+      searchString += '&sortby='+ this.sort;
     }
     return searchString;
   }
@@ -211,6 +211,15 @@ export class ProductlistPage implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('/products');
+  }
+
+  userProfile(customerid) {
+    this.router.navigate(['/profile'], { queryParams: { customer: customerid } });
+  }
+
+  viewProduct(slug) {
+    this.router.navigate(['/productview'], { queryParams: { slug: slug } });
+    
   }
 
 }

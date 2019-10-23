@@ -2,81 +2,86 @@
 
 <ion-content padding>
   <div class="productsection">
-    
-    <div class="productTitlesection">
-        <p class="txt">{{posts.ser_title}}</p>
-        <p class="ser_section_types">
-          <span class="txt">{{posts.ser_cate_name}}</span> 
-          <span class="icon"><ion-icon name="ios-arrow-round-forward"></ion-icon></span>
-          <span class="txt">{{posts.pro_subcate_name}}</span>
-        </p>
-    </div>
     <div class="gallery">
-      <ion-slides pager="true" [options]="slideOpts" *ngIf="posts.galleryimages">
-        <ion-slide *ngFor="let images of posts.galleryimages">
+      <ion-slides pager="true" [options]="slideOpts" *ngIf="gallery.length > 0">
+        <ion-slide *ngFor="let images of gallery">
             <img class="imagegal" src="{{images}}">
         </ion-slide>
       </ion-slides>
     </div>
-    <div class="pricing">
-      <h3 class="price" *ngIf="posts.ser_discount_price !='' && posts.discount > 0">
-          ₹{{posts.ser_discount_price}} / {{posts.ser_pricet_type}}
-      </h3>
-      <h3 class="price" *ngIf="posts.discount == 0">
-          ₹{{posts.ser_price}} / {{posts.ser_pricet_type}}
-      </h3>
-    </div>
-    <div class="description">
-      <p>{{posts.ser_description}}</p>
-    </div>
-    <p>
-        <ion-button (click)="showFilter(posts)" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Book now</ion-button>
-    </p>
-    <div class="providersection" >
-      <ion-avatar slot="start" class="ios hydrated" (click)="userProfile(posts.customer_username)">
-          <img src="{{posts.customer_image}}">
-      </ion-avatar>
-      <p> Service provided by <span class="providername" (click)="userProfile(posts.customer_username)">{{posts.customer_username}}</span>
-        <br>
-        <!--<span class="shareicons">
-          <a target="_blank" href="https://www.facebook.com/sharer.php?u=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-facebook"></ion-icon></a>
-          <a target="_blank" href="https://plus.google.com/share?url=http://www.bloggoto.com/services/view/{{posts.ser_slug}}">  <ion-icon name="logo-googleplus"></ion-icon></a>
-          <a target="_blank" href="https://twitter.com/share?text=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-twitter"></ion-icon></a>
-          <a target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="mail"></ion-icon></a>
-        </span>-->
-        <span class="shareicons">
-            <a target="_blank" *ngIf="posts.customer_facebook_link" href="{{posts.customer_facebook_link}}"><ion-icon name="logo-facebook"></ion-icon></a>
-            <a target="_blank" *ngIf="posts.customer_youtube_link" href="{{posts.customer_youtube_link}}"><ion-icon name="logo-youtube"></ion-icon></a>
-            <a target="_blank" *ngIf="posts.customer_twitter_link" href="{{posts.customer_twitter_link}}"><ion-icon name="logo-twitter"></ion-icon></a>
-            <a target="_blank" *ngIf="posts.customer_instagram_link" href="{{posts.customer_instagram_link}}"><ion-icon name="logo-instagram"></ion-icon></a>
-            <a target="_blank" *ngIf="posts.customer_linkedin_link" href="{{posts.customer_linkedin_link}}"><ion-icon name="logo-linkedin"></ion-icon></a>
-            <a target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.customer_email}}"><ion-icon name="mail"></ion-icon></a>
-            <a target="_blank" *ngIf="posts.customer_phone" href="tel:{{posts.customer_phone}}"><ion-icon name="call"></ion-icon></a>
-          </span>
-      </p>
+    
+    <div class="productTitlesection">
+        <span class="providername" (click)="userProfile(posts.customer_username)">{{posts.customer_username}}</span>
+        <p class="txt">{{posts.product_name}}</p>
     </div>
     
-    <div class="availability">
-      <ion-list-header class="ios hydrated">Availability</ion-list-header>
-      <ion-chip outline class="ion-color ion-color-primary ios chip-outline ion-activatable hydrated" *ngFor="let availability of posts.availability">
-        <ion-label  *ngIf="availability != ''">{{availability}}</ion-label>
-      </ion-chip>
+    <div class="pricing">
+      <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product_special_price != ''">₹{{product_special_price}}</span>
+      <!--<span class="price a-size-medium a-color-price a-text-bold" *ngIf="posts.discount <= 0">₹{{posts.product_price}}</span>
+      <span class="a-letter-space"></span>-->
+      <span class="old-price a-text-strike"  *ngIf="product_special_price != ''">₹{{price}}</span>
+    </div>
+    
+    <div class="attributes_section" *ngIf="attributes.length > 0">
+      <ion-card *ngFor="let attribute of attributes">
+        <ion-card-header>
+          <ion-card-title>
+            {{attribute.pro_modifier_name}}
+            <span>{{getSelectedAttributeValue(attribute)}}</span>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-chip outline (click)="selectAttribute(attribute, i)" [ngClass]="{'active': getActive(attribute.pro_modifier_id, attribute.values.primary_ids[i])}" class="ion-color ion-color-primary ios chip-outline ion-activatable hydrated" *ngFor="let attributeName of attribute.values.names; let i=index">
+            <ion-label *ngIf="attribute.pro_modifier_display == 'text' || (attribute.pro_modifier_display == 'image' && (attribute.value_images[i] ==undefined || attribute.value_images[i] == ''))">{{attributeName}}</ion-label>
+            <ion-label *ngIf="attribute.pro_modifier_display == 'image' && attribute.value_images[i] != undefined && attribute.value_images[i] != ''">{{attribute.value_images[i]}}</ion-label>
+          </ion-chip>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
-        <ion-list-header class="ios hydrated">Available Cities</ion-list-header>
-        <ion-chip outline class="ion-color ion-color-primary ios chip-outline ion-activatable hydrated"  *ngFor="let city of posts.cities">
-          <ion-label  *ngIf="city != ''">{{city}}</ion-label>
-        </ion-chip>
-      </div>
+    <div class="shipping_section">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Shipping Method</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+              <ion-select [(ngModel)]="shippingMethod" placeholder="Select Shipping Method">
+                <ion-select-option value="{{shipmode.prod_ass_ship_method_shipid+'--'+shipmode.ship_method_name}}" *ngFor="let shipmode of shippingMethods">{{shipmode.ship_method_name}} - ₹{{shipmode.prod_ass_ship_method_price}}</ion-select-option>
+              </ion-select>
+          </ion-card-content>
+        </ion-card>      
+    </div>
+    <div class="description">
+      <p>{{posts.product_long_description}}</p>
+    </div>
+    
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="dark">
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://www.facebook.com/sharer.php?u=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-facebook"></ion-icon></a></ion-fab-button>
-      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://plus.google.com/share?url=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-googleplus"></ion-icon></a></ion-fab-button>
-      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://twitter.com/share?text=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="logo-twitter"></ion-icon></a></ion-fab-button>
-      <ion-fab-button color="dark"><a class="white" target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.ser_slug}}"><ion-icon name="mail"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://www.facebook.com/sharer.php?u=http://www.bloggoto.com/services/view/{{posts.product_slug}}"><ion-icon name="logo-facebook"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://plus.google.com/share?url=http://www.bloggoto.com/services/view/{{posts.product_slug}}"><ion-icon name="logo-googleplus"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="https://twitter.com/share?text=http://www.bloggoto.com/services/view/{{posts.product_slug}}"><ion-icon name="logo-twitter"></ion-icon></a></ion-fab-button>
+      <ion-fab-button color="dark"><a class="white" target="_blank" href="mailto:?subject=Referal&body=http://www.bloggoto.com/services/view/{{posts.product_slug}}"><ion-icon name="mail"></ion-icon></a></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="4">
+            <div class="pricing">
+              <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product_special_price != ''">₹{{product_special_price}}</span>
+              <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product_special_price == ''">₹{{price}}</span>
+            </div>
+        </ion-col>
+        <ion-col size="8">
+          <ion-button [ngClass]="{'disabled': (selectedAttribure.length != attributes.length || shippingMethod =='') }"  *ngIf="userInfo !== null" (click)="showFilter(posts)" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Add to cart</ion-button>
+          <ion-button  *ngIf="userInfo == null" (click)="redirectLogin()" expand="block" class="ios button button-block button-solid ion-activatable ion-focusable hydrated">Login Now to Book</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>

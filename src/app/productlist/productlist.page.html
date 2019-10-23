@@ -52,15 +52,15 @@
         </ion-refresher>
         <ion-col size="6" class='cardProducts' *ngFor="let product of products; let i = index">
             <div class="card-container">
-              <div class="outer_img">
+              <div class="outer_img" (click)="viewProduct(product.product_slug)">
                 <div class="inner_img">
                     <img [src]="product.product_thumbnail"  class="imgCardMain" />
                 </div>
               </div>
               <div class="grid-detail">
-                <h5 class="sx-title"><span class="textProductTitle">{{ product.product_name.replace('\\', '') }}</span></h5>
+                <h5 class="sx-title" (click)="viewProduct(product.product_slug)"><span class="textProductTitle">{{ product.product_name.replace('\\', '') }}</span></h5>
                 <!--<span class="productdesc" [innerHTML]="product.product_short_description"></span>-->
-                <div class="a-row a-spacing-mini a-size-mini a-color-secondary sx-overflow-ellipses"><span>by </span><span>COTTON SHOPY</span></div>
+                <div class="a-row a-spacing-mini a-size-mini a-color-secondary sx-overflow-ellipses"><span>by </span><span (click)="userProfile(product.customer_username)">{{ product.customer_username }}</span></div>
                 <div class="reduction">
                   <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product.discount > 0">₹{{product.product_special_price}}</span>
                   <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product.discount <= 0">₹{{product.product_price}}</span>

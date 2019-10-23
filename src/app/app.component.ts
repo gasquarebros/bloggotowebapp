@@ -10,6 +10,8 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 
 import { StaticPage } from './static/static.page';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -54,6 +56,8 @@ export class AppComponent {
       this.authService.getUserInfo().then(items => {
         this.userInfo = items;
       });
+
+      
     });
 
     // Convenience to route with a given nav
@@ -93,4 +97,6 @@ export class AppComponent {
     this.menuCtrl.close('content1');
     this.router.navigateByUrl('/draft-posts?type=' + type);
   }
+
+
 }
