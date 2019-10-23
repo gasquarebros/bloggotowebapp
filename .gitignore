@@ -3,4 +3,7 @@ platforms
 # dependencies
 /node_modules
 /platforms
+/plugins
+/www
 plugins
+www
