@@ -66,7 +66,7 @@ export class SignupPage implements OnInit {
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl('', Validators.compose([
         Validators.maxLength(25),
-        Validators.minLength(5),
+        Validators.minLength(2),
         Validators.required
       ])),
       companyname: new FormControl( ''),

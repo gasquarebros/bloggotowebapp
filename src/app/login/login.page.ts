@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   validation_messages = {
     'username': [
       { type: 'required', message: 'EmailId/Username is required.' },
-      { type: 'minlength', message: 'Username must be at least 5 characters long.' },
+      { type: 'minlength', message: 'Username must be at least 4 characters long.' },
       { type: 'maxlength', message: 'Username cannot be more than 255 characters long.' },
       { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
       { type: 'validUsername', message: 'Your username has already been taken.' }
@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
       this.validations_form = this.formBuilder.group({
         username: new FormControl('', Validators.compose([
           Validators.maxLength(25),
-          Validators.minLength(5),
+          Validators.minLength(4),
           // Validators.pattern('^(?=.*[a-zA-Z])(?=.*[@0-9])[a-zA-Z0-9]+$'),
           Validators.required
         ])),

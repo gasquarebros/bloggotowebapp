@@ -1,11 +1,40 @@
 <ion-grid>
-  <ion-row responsive-sm wrap> 
-      <ion-col width-50 col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3 *ngFor="let record of posts; let i = index"> icon-col </ion-col>
-      <ion-col width-50 col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3> icon-col </ion-col>
-      <ion-col width-50 col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3> icon-col </ion-col>
-      <ion-col width-50 col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3> icon-col </ion-col>
-      <ion-col width-50 col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3> icon-col </ion-col>
+  <ion-row>
+    <ion-refresher slot="fixed" 
+      (ionRefresh)="ionRefresh($event)" 
+      (ionPull)="ionPull($event)" 
+      (ionStart)="ionStart($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+        <ion-spinner></ion-spinner>
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-col size="6" class='cardProducts' *ngFor="let product of products; let i = index">
+        <div class="card-container">
+          <div class="outer_img" (click)="viewProduct(product.product_slug)">
+            <div class="inner_img">
+                <img [src]="product.product_thumbnail"  class="imgCardMain" />
+            </div>
+          </div>
+          <div class="grid-detail">
+            <h5 class="sx-title" (click)="viewProduct(product.product_slug)"><span class="textProductTitle">{{ product.product_name.replace('\\', '') }}</span></h5>
+            <!--<span class="productdesc" [innerHTML]="product.product_short_description"></span>-->
+            <div class="a-row a-spacing-mini a-size-mini a-color-secondary sx-overflow-ellipses"><span>by </span><span (click)="userProfile(product.customer_username)">{{ product.customer_username }}</span></div>
+            <div class="reduction">
+              <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product.discount > 0">₹{{product.product_special_price}}</span>
+              <span class="price a-size-medium a-color-price a-text-bold" *ngIf="product.discount <= 0">₹{{product.product_price}}</span>
+              <span class="a-letter-space"></span>
+              <span class="old-price a-text-strike"  *ngIf="product.discount > 0">₹{{product.product_price}}</span>
+            </div>
+          </div>
+        </div>
+    </ion-col>
+    <ion-infinite-scroll (ionInfinite)="ionRefresh($event, nextOffset)" loadingSpinner="bubbles" loadingText="Loading Users...">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-row>
-
  
 </ion-grid> 

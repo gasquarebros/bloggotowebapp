@@ -95,6 +95,9 @@ export class ProductlistPage implements OnInit {
     if(this.sort != undefined && this.sort !='') {
       searchString += '&sortby='+ this.sort;
     }
+    if(this.nextOffset != undefined && this.nextOffset > 0) {
+      searchString += '&offset='+ this.nextOffset;
+    }
     return searchString;
   }
 
@@ -123,7 +126,8 @@ export class ProductlistPage implements OnInit {
   ionRefresh(event, offset) {
     if (offset !== '') {
       if (offset !== undefined) {
-       this.fetchProducts();
+        this.nextOffset = offset;
+        this.fetchProducts();
       } else {
         this.fetchProducts();
       }
